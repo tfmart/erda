@@ -45,7 +45,7 @@ int main() {
                 nova->proximo = dados->proximo;
                 dados->proximo = nova;
                 boolCadastro = 1;
-                ordernarLista(dados);
+                //ordernarLista(dados);
                 break;
             case 2:
                 //BUSCA POR RA
@@ -77,6 +77,7 @@ int main() {
                     printf("Nenhum aluno foi cadastrado até o momento\n\n");
                 }
                 else {
+                    ordernarLista(dados);
                     todosAlunos(dados);
                 }
                 break;
@@ -128,15 +129,28 @@ void todosAlunos (celula *lista) {
 
 //funcao para ordernar a lista de alunos por RA (ordem crescente)
 void ordernarLista(celula *lista) {
-    int aux;
+    //todosAlunos(lista);
     celula *i, *j;
-    for (i = lista; i != NULL; i=i->proximo) {
-        for (j = i->proximo; j != NULL; j = j->proximo) {
-            if (i->ra > j->ra) {
-                aux = i->ra;
-                i->ra = j->ra;
-                j->ra = aux;
+    i = j = lista;
+    int auxRA;
+    float auxNota;
+    char auxNome[50];
+    while (i != NULL) {
+        while (j->proximo != NULL) {
+            if (j->ra > j->proximo->ra) {
+                auxRA = j->ra;
+                auxNota = j->nota;
+                strcpy(auxNome, j->nome);
+                j->ra = j->proximo->ra;
+                j->nota = j->proximo->nota;
+                strcpy(j->nome, j->proximo->nome);
+                j->proximo->ra = auxRA;
+                j->proximo->nota = auxNota;
+                strcpy(j->proximo->nome, auxNome);
             }
+            j = j->proximo;
         }
+        j = lista;
+        i = i->proximo;
     }
 }
