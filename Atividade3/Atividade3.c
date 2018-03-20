@@ -1,6 +1,3 @@
-//Para fazer:
-//  - Ordernar lista por RA (ordem crescente)
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,6 +16,7 @@ typedef struct tipoAluno celula;
 celula *buscaRa(int ra, celula *lista);
 celula *buscaNome(char nome[], celula *lista);
 void todosAlunos (celula *lista);
+void ordernarLista(celula *lista);
 
 int main() {
     int leituraRA, menu, boolCadastro = 0;
@@ -47,6 +45,7 @@ int main() {
                 nova->proximo = dados->proximo;
                 dados->proximo = nova;
                 boolCadastro = 1;
+                ordernarLista(dados);
                 break;
             case 2:
                 //BUSCA POR RA
@@ -124,5 +123,20 @@ void todosAlunos (celula *lista) {
     printf("Alunos cadastrados: \n\n");
     for (print = lista->proximo; print != NULL; print = print->proximo) {
         printf("%s\nRA: %d\nNota: %.1f\n\n", print->nome, print->ra, print->nota);
+    }
+}
+
+//funcao para ordernar a lista de alunos por RA (ordem crescente)
+void ordernarLista(celula *lista) {
+    int aux;
+    celula *i, *j;
+    for (i = lista; i != NULL; i=i->proximo) {
+        for (j = i->proximo; j != NULL; j = j->proximo) {
+            if (i->ra > j->ra) {
+                aux = i->ra;
+                i->ra = j->ra;
+                j->ra = aux;
+            }
+        }
     }
 }
