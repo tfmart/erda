@@ -19,12 +19,38 @@ struct no {
  
 // Questao 1
 void insereInicio (No **pLista, int n) {
+no *aux = (no*)malloc(sizeof(no));
 
+aux->chave = n;
+
+aux->prox = (*pLista);
+
+(*pLista) = aux;
 }
 
 // Questao 2
 void insereFim (No **pLista, int n) {
-  
+  no *aux = (*pLista);
+
+no *novo = (no*)malloc(sizeof(no));
+
+novo->chave = n;
+
+novo->prox = NULL;
+
+if (aux == NULL) {
+*pLista = novo;
+}
+
+else {
+
+while (aux->prox != NULL) {
+aux = aux->prox;
+
+}
+aux->prox = novo;
+
+}
 }
 
 // Questao 3
@@ -34,11 +60,32 @@ void insereK (No **pLista, int n, int k) {
 
 // Questao 4
 void exibePrimeiro (No *Lista) {
+if (pLista== NULL) {
+printf("Nao ha nada para ser impresso\n");
+}
+else {
+printf("%d\n", pLista->chave);
+
+}
 
 }
 
 // Questao 5
 void exibeUltimo (No *Lista){
+no *aux = pLista;
+
+if (aux == NULL) {
+printf("Nao ha nada para ser impresso\n");
+}
+else {
+
+while (aux->prox != NULL) {
+aux = aux->prox;
+
+}
+
+
+printf("%d\n", aux->chave);
 
 }
 
