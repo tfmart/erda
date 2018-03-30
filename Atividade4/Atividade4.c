@@ -1,10 +1,10 @@
 /*
  * Estrutura e Recuperação de Dados A
  * Atividade 4 (Lista Ligada)
- * 
+ *
  * Para compilar com o DEBUG ativado:
  * $ gcc -DDEBUG -g Atividade4.c -o Atividade4
- * 
+ *
  */
 
 #include<stdio.h>
@@ -16,134 +16,135 @@ struct no {
     int chave;
     No *prox;
 };
- 
+
 // Questao 1
 void insereInicio (No **pLista, int n) {
-no *aux = (no*)malloc(sizeof(no));
-
-aux->chave = n;
-
-aux->prox = (*pLista);
-
-(*pLista) = aux;
+    No *aux = (No*)malloc(sizeof(No));
+    
+    aux->chave = n;
+    
+    aux->prox = (*pLista);
+    
+    (*pLista) = aux;
 }
 
 // Questao 2
 void insereFim (No **pLista, int n) {
-  no *aux = (*pLista);
-
-no *novo = (no*)malloc(sizeof(no));
-
-novo->chave = n;
-
-novo->prox = NULL;
-
-if (aux == NULL) {
-*pLista = novo;
-}
-
-else {
-
-while (aux->prox != NULL) {
-aux = aux->prox;
-
-}
-aux->prox = novo;
-
-}
+    No *aux = (*pLista);
+    
+    No *novo = (No*)malloc(sizeof(No));
+    
+    novo->chave = n;
+    
+    novo->prox = NULL;
+    
+    if (aux == NULL) {
+        *pLista = novo;
+    }
+    
+    else {
+        
+        while (aux->prox != NULL) {
+            aux = aux->prox;
+            
+        }
+        aux->prox = novo;
+        
+    }
 }
 
 // Questao 3
 void insereK (No **pLista, int n, int k) {
-
+    
 }
 
 // Questao 4
 void exibePrimeiro (No *Lista) {
-if (pLista== NULL) {
-printf("Nao ha nada para ser impresso\n");
-}
-else {
-printf("%d\n", pLista->chave);
-
-}
-
+    if (Lista== NULL) {
+        printf("Nao ha nada para ser impresso\n");
+    }
+    else {
+        printf("%d\n", Lista->chave);
+        
+    }
+    
 }
 
 // Questao 5
 void exibeUltimo (No *Lista){
-no *aux = pLista;
-
-if (aux == NULL) {
-printf("Nao ha nada para ser impresso\n");
-}
-else {
-
-while (aux->prox != NULL) {
-aux = aux->prox;
-
-}
-
-
-printf("%d\n", aux->chave);
-
+    No *aux = Lista;
+    
+    if (aux == NULL) {
+        printf("Nao ha nada para ser impresso\n");
+    }
+    else {
+        
+        while (aux->prox != NULL) {
+            aux = aux->prox;
+            
+        }
+        
+        
+        printf("%d\n", aux->chave);
+        
+    }
 }
 
 // Questao 6
 void exibeK (No *Lista, int k) {
-
+    
 }
 
 // Questao 7
 int procuraN (No *Lista, int n) {
-
+    
 }
 
 // Questao 8
 int quantidade (No *Lista) {
-
+    
 }
 
 // Questao 9
 int soma (No *Lista) {
-
+    
 }
 
 // Questao 10
 float media (No *Lista) {
-
+    
 }
 
 // Questao 11
 void excluiPrimeiro (No **pLista) {
-
+    
 }
 
 // Questao 12
 void excluiUltimo (No **pLista) {
-
+    
 }
 
 // Questao 13
 void excluiK (No **pLista, int k) {
-
+    
 }
 
 // Questao 14
 void excluiN (No **pLista, int n) {
-
+    
 }
 
 // Cria uma lista vazia
 void criaVazia (No **pLista) {
-  *pLista = NULL;
+    *pLista = NULL;
 }
 
 // DEBUG: Exibe todos os elementos de uma Lista
 void exibe (No *Lista) {
     while (Lista!=NULL) {
-      printf("%d ",Lista->chave);
-      Lista = Lista->prox;
+        printf("%d ",Lista->chave);
+        Lista = Lista->prox;
     }
 }
 
@@ -176,8 +177,8 @@ int main() {
                 printf("Opcao invalida!\n");
         } while ((opcao<0) || (opcao>14));
         switch (opcao) {
-	    case 0:
-		printf("Finalizando o programa.\n");
+            case 0:
+                printf("Finalizando o programa.\n");
                 return 0;
             case 1:
                 // Insere um elemento no inicio da lista
@@ -207,31 +208,31 @@ int main() {
                 insereK(&Lista,n,k);
                 break;
             case 4:
-		// Exibe o primeiro elemento da lista
+                // Exibe o primeiro elemento da lista
                 printf("Q-4 Exibe o primeiro elemento\n");
                 printf("Chave: ");
                 exibePrimeiro(Lista);
                 printf("\n");
                 break;
             case 5:
-		// Exibe o ultimo elemento da lista
+                // Exibe o ultimo elemento da lista
                 printf("Q-5 Exibe o ultimo elemento\n");
                 printf("Chave: ");
                 exibeUltimo(Lista);
                 printf("\n");
                 break;
-	    case 6:
-		// Exibe o k-esimo elemento da lista
+            case 6:
+                // Exibe o k-esimo elemento da lista
                 printf("Q-6 Exibe o k-esimo elemento\n");
                 printf("k: ");
                 __fpurge(stdin);
                 scanf("%d",&k);
                 printf("Chave: ");
                 exibeK(Lista,k);
-		printf("\n");
-		break;
-	    case 7:
-		// Procura por um elemento da lista
+                printf("\n");
+                break;
+            case 7:
+                // Procura por um elemento da lista
                 printf("Q-7 Procura por um elemento\n");
                 printf("Chave: ");
                 __fpurge(stdin);
@@ -240,55 +241,56 @@ int main() {
                     printf("Elemento %d encontrado.\n", n);
                 else
                     printf("Elemento %d não encontrado.\n", n);
-		break;
-	    case 8:
-		// Exibe a quantidade de elementos da lista
+                break;
+            case 8:
+                // Exibe a quantidade de elementos da lista
                 printf("Q-8 Exibe a quantidade de elementos\n");
                 printf("Quantidade de elementos: %d\n", quantidade(Lista));
-		break;
-	    case 9:
-		// Exibe a soma dos elementos da lista
+                break;
+            case 9:
+                // Exibe a soma dos elementos da lista
                 printf("Q-9 Exibe a soma dos elementos\n");
                 printf("Soma: %d\n", soma(Lista));
-		break;
-	    case 10:
-		// Exibe a media dos elementos da lista
+                break;
+            case 10:
+                // Exibe a media dos elementos da lista
                 printf("Q-10 Exibe a media dos elementos\n");
                 printf("Media: %f\n", media(Lista));
-		break;
-	    case 11:
-		// Exclui o primeiro elemento da lista
+                break;
+            case 11:
+                // Exclui o primeiro elemento da lista
                 printf("Q-11 Exclui o primeiro elemento\n");
                 excluiPrimeiro(&Lista);
-		break;
-	    case 12:
-		// Exclui o ultimo elemento da lista
+                break;
+            case 12:
+                // Exclui o ultimo elemento da lista
                 printf("Q-12 Exclui o ultimo elemento\n");
                 excluiUltimo(&Lista);
-		break;
-	    case 13:
-		// Exclui o k-esimo elemento da lista
-                printf("Q-13 Exclui o k-esimo elemento\n");	      
+                break;
+            case 13:
+                // Exclui o k-esimo elemento da lista
+                printf("Q-13 Exclui o k-esimo elemento\n");
                 printf("k: ");
                 __fpurge(stdin);
                 scanf("%d",&k);
                 excluiK(&Lista,k);
-		break;
-	    case 14:
-		// Exclui um elemento procurado da lista
-                printf("Q-14 Exclui um elemento procurado\n");	      
+                break;
+            case 14:
+                // Exclui um elemento procurado da lista
+                printf("Q-14 Exclui um elemento procurado\n");
                 printf("Chave: ");
                 __fpurge(stdin);
                 scanf("%d",&n);
                 excluiN(&Lista,n);
-		break;            
-	    default:
+                break;
+            default:
                 break;
         }
 #ifdef DEBUG
-	printf("\n[DEBUG] Lista: ");
-	exibe(Lista);
-	printf("\n");
+        printf("\n[DEBUG] Lista: ");
+        exibe(Lista);
+        printf("\n");
 #endif
     }
 }
+
