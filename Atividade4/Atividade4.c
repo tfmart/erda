@@ -117,21 +117,59 @@ float media (No *Lista) {
 
 // Questao 11
 void excluiPrimeiro (No **pLista) {
-    
+    No *aux = *pLista;
+    aux = aux->prox;
+    free(pLista);
+    *pLista = aux;
 }
 
 // Questao 12
 void excluiUltimo (No **pLista) {
-    
+    No *aux = *pLista;
+    No *temp;
+    while (aux->prox != NULL) {
+        temp = aux;
+        aux = aux->prox;
+    }
+    free(temp->prox);
+    temp->prox = NULL;
 }
 
 // Questao 13
 void excluiK (No **pLista, int k) {
+    No *aux = *pLista;
+    No *temp;
+    int contador, busca = 1;
+    for (contador = 0; contador < k; contador++) {
+        if (aux->prox == NULL){
+            busca = 0;
+            break;
+        }
+        else {
+            temp = aux;
+            aux = aux->prox;
+        }
+    }
     
 }
 
 // Questao 14
 void excluiN (No **pLista, int n) {
+    int busca = 0;
+    No *aux = *pLista;
+    No *temp;
+    while (aux->prox != NULL) {
+        temp = aux;
+        aux = aux->prox;
+        if (temp->chave == n) {
+            busca = 1;
+            break;
+        }
+    }
+    if (busca == 0) printf("%i nao foi achado na lista\n", n);
+    else {
+        free(temp);
+    }
     
 }
 
