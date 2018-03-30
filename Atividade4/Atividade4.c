@@ -91,28 +91,83 @@ void exibeUltimo (No *Lista){
 }
 
 // Questao 6
-void exibeK (No *Lista, int k) {
+void exibeK (No *Lista, int k) 
+{
+    No *aux = Lista;
+
+	for (int i = 0; i < k; i++)
+	{
+		aux = aux->prox;
+	}
     
+    printf(" Posicao %i, elemento %i", k, aux->chave);
 }
 
 // Questao 7
-int procuraN (No *Lista, int n) {
-    
+int procuraN (No *Lista, int n) 
+{
+    No *aux = Lista;
+
+	while (aux->prox != NULL)
+	{
+		if (aux->chave == n)
+		{
+			return 1;
+		}
+
+		aux = aux->prox;
+	}
+
+	return 0;
 }
 
 // Questao 8
-int quantidade (No *Lista) {
-    
+int quantidade (No *Lista) 
+{
+    int i = 0;
+
+	No *aux = Lista;
+
+	while (aux != NULL)
+	{
+		i++;
+		aux = aux->prox;
+	}
+
+	return i;
 }
 
 // Questao 9
-int soma (No *Lista) {
-    
+int soma (No *Lista)
+{
+    float soma = 0;
+
+	No *aux = Lista;
+
+	while (aux->prox == NULL)
+	{
+		soma = soma + aux->chave;
+		aux = aux->prox;
+	}
+
+	return soma;
 }
 
 // Questao 10
-float media (No *Lista) {
-    
+float media (No *Lista) 
+{
+    float soma = 0, md;
+	int i = 0;
+
+	while (aux->prox == NULL)
+	{
+		i++;
+		soma = soma + aux->chave;
+		aux = aux->prox;
+	}
+	md = soma / i;
+	
+	return md;
 }
 
 // Questao 11
