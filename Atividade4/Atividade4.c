@@ -8,8 +8,6 @@
  */
 
 //TO FIX
-//  - 7 (não encontra o ultimo elemento da litsa)
-//  - 9 (soma retorna zero)
 //  - 10 (media retorna nan)
 //  - 11 (acessa memoria errada)
 //  - 13 (não apaga nenhum elemento da lista)
@@ -142,6 +140,10 @@ int procuraN (No *Lista, int n)
         
         aux = aux->prox;
     }
+    //condicional para ultimo elemento da lista
+    if (aux ->chave == n) {
+        return 1;
+    }
     
     return 0;
 }
@@ -169,11 +171,13 @@ int soma (No *Lista)
     
     No *aux = Lista;
     
-    while (aux->prox == NULL)
+    while (aux->prox != NULL)
     {
         soma = soma + aux->chave;
         aux = aux->prox;
     }
+    //para somar ultimo elemento da lista
+    soma = soma + aux->chave;
     
     return soma;
 }
