@@ -11,7 +11,7 @@
 //  - 14 (não apaga nenhum elemento da lista)
 
 #include<stdio.h>
-//#include<stdio_ext.h>
+#include<stdio_ext.h>
 #include<stdlib.h>
 
 typedef struct no No;
@@ -309,8 +309,7 @@ int main() {
                 // Insere um elemento no inicio da lista
                 printf("Q-1 Insere um elemento no inicio\n");
                 printf("Chave: ");
-                //__fpurge(stdin);
-                fpurge(stdin);
+                __fpurge(stdin);
                 scanf("%d",&n);
                 insereInicio(&Lista,n);
                 break;
@@ -318,8 +317,7 @@ int main() {
                 // Insere um elemento no fim da lista
                 printf("Q-2 Insere um elemento no fim\n");
                 printf("Chave: ");
-                //__fpurge(stdin);
-                fpurge(stdin);
+                __fpurge(stdin);
                 scanf("%d",&n);
                 insereFim(&Lista,n);
                 break;
@@ -327,12 +325,10 @@ int main() {
                 // Insere um elemento na k-esima posicao da lista
                 printf("Q-3 Insere um elemento na k-esima posicao\n");
                 printf("Chave: ");
-                //__fpurge(stdin);
-                fpurge(stdin);
+                __fpurge(stdin);
                 scanf("%d",&n);
                 printf("k: ");
-                //__fpurge(stdin);
-                fpurge(stdin);
+                __fpurge(stdin);
                 scanf("%d",&k);
                 insereK(&Lista,n,k);
                 break;
@@ -354,8 +350,7 @@ int main() {
                 // Exibe o k-esimo elemento da lista
                 printf("Q-6 Exibe o k-esimo elemento\n");
                 printf("k: ");
-                //__fpurge(stdin);
-                fpurge(stdin);
+                __fpurge(stdin);
                 scanf("%d",&k);
                 printf("Chave: ");
                 exibeK(Lista,k);
@@ -365,8 +360,7 @@ int main() {
                 // Procura por um elemento da lista
                 printf("Q-7 Procura por um elemento\n");
                 printf("Chave: ");
-                //__fpurge(stdin);
-                fpurge(stdin);
+                __fpurge(stdin);
                 scanf("%d",&n);
                 if (procuraN(Lista,n))
                     printf("Elemento %d encontrado.\n", n);
@@ -402,8 +396,7 @@ int main() {
                 // Exclui o k-esimo elemento da lista
                 printf("Q-13 Exclui o k-esimo elemento\n");
                 printf("k: ");
-                //__fpurge(stdin);
-                fpurge(stdin);
+                __fpurge(stdin);
                 scanf("%d",&k);
                 excluiK(&Lista,k);
                 break;
@@ -411,8 +404,7 @@ int main() {
                 // Exclui um elemento procurado da lista
                 printf("Q-14 Exclui um elemento procurado\n");
                 printf("Chave: ");
-                //__fpurge(stdin);
-                fpurge(stdin);
+                __fpurge(stdin);
                 scanf("%d",&n);
                 excluiN(&Lista,n);
                 break;
