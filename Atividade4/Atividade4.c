@@ -7,8 +7,16 @@
  *
  */
 
+//TO FIX
+//  - 7 (não encontra o ultimo elemento da litsa)
+//  - 9 (soma retorna zero)
+//  - 10 (media retorna nan)
+//  - 11 (acessa memoria errada)
+//  - 13 (não apaga nenhum elemento da lista)
+//  - 14 (não apaga nenhum elemento da lista)
+
 #include<stdio.h>
-#include<stdio_ext.h>
+//#include<stdio_ext.h>
 #include<stdlib.h>
 
 typedef struct no No;
@@ -55,6 +63,23 @@ void insereFim (No **pLista, int n) {
 
 // Questao 3
 void insereK (No **pLista, int n, int k) {
+    int contador;
+    No *novo = (No*)malloc(sizeof(No));
+    No *aux = (*pLista);
+    
+    novo->chave = n;
+    
+    if (k == 0) {
+        insereInicio(pLista, n);
+    }
+    else {
+        for (contador = 0; contador < k-1; contador++) {
+            aux = aux->prox;
+        }
+        novo->prox = aux->prox;
+        aux->prox = novo;
+        
+    }
     
 }
 
@@ -91,83 +116,84 @@ void exibeUltimo (No *Lista){
 }
 
 // Questao 6
-void exibeK (No *Lista, int k) 
+void exibeK (No *Lista, int k)
 {
     No *aux = Lista;
-
-	for (int i = 0; i < k; i++)
-	{
-		aux = aux->prox;
-	}
+    
+    for (int i = 0; i < k; i++)
+    {
+        aux = aux->prox;
+    }
     
     printf(" Posicao %i, elemento %i", k, aux->chave);
 }
 
 // Questao 7
-int procuraN (No *Lista, int n) 
+int procuraN (No *Lista, int n)
 {
     No *aux = Lista;
-
-	while (aux->prox != NULL)
-	{
-		if (aux->chave == n)
-		{
-			return 1;
-		}
-
-		aux = aux->prox;
-	}
-
-	return 0;
+    
+    while (aux->prox != NULL)
+    {
+        if (aux->chave == n)
+        {
+            return 1;
+        }
+        
+        aux = aux->prox;
+    }
+    
+    return 0;
 }
 
 // Questao 8
-int quantidade (No *Lista) 
+int quantidade (No *Lista)
 {
     int i = 0;
-
-	No *aux = Lista;
-
-	while (aux != NULL)
-	{
-		i++;
-		aux = aux->prox;
-	}
-
-	return i;
+    
+    No *aux = Lista;
+    
+    while (aux != NULL)
+    {
+        i++;
+        aux = aux->prox;
+    }
+    
+    return i;
 }
 
 // Questao 9
 int soma (No *Lista)
 {
     float soma = 0;
-
-	No *aux = Lista;
-
-	while (aux->prox == NULL)
-	{
-		soma = soma + aux->chave;
-		aux = aux->prox;
-	}
-
-	return soma;
+    
+    No *aux = Lista;
+    
+    while (aux->prox == NULL)
+    {
+        soma = soma + aux->chave;
+        aux = aux->prox;
+    }
+    
+    return soma;
 }
 
 // Questao 10
-float media (No *Lista) 
+float media (No *Lista)
 {
+    No *aux = Lista;
     float soma = 0, md;
-	int i = 0;
-
-	while (aux->prox == NULL)
-	{
-		i++;
-		soma = soma + aux->chave;
-		aux = aux->prox;
-	}
-	md = soma / i;
-	
-	return md;
+    int i = 0;
+    
+    while (aux->prox == NULL)
+    {
+        i++;
+        soma = soma + aux->chave;
+        aux = aux->prox;
+    }
+    md = soma / i;
+    
+    return md;
 }
 
 // Questao 11
@@ -277,7 +303,8 @@ int main() {
                 // Insere um elemento no inicio da lista
                 printf("Q-1 Insere um elemento no inicio\n");
                 printf("Chave: ");
-                __fpurge(stdin);
+                //__fpurge(stdin);
+                fpurge(stdin);
                 scanf("%d",&n);
                 insereInicio(&Lista,n);
                 break;
@@ -285,7 +312,8 @@ int main() {
                 // Insere um elemento no fim da lista
                 printf("Q-2 Insere um elemento no fim\n");
                 printf("Chave: ");
-                __fpurge(stdin);
+                //__fpurge(stdin);
+                fpurge(stdin);
                 scanf("%d",&n);
                 insereFim(&Lista,n);
                 break;
@@ -293,10 +321,12 @@ int main() {
                 // Insere um elemento na k-esima posicao da lista
                 printf("Q-3 Insere um elemento na k-esima posicao\n");
                 printf("Chave: ");
-                __fpurge(stdin);
+                //__fpurge(stdin);
+                fpurge(stdin);
                 scanf("%d",&n);
                 printf("k: ");
-                __fpurge(stdin);
+                //__fpurge(stdin);
+                fpurge(stdin);
                 scanf("%d",&k);
                 insereK(&Lista,n,k);
                 break;
@@ -318,7 +348,8 @@ int main() {
                 // Exibe o k-esimo elemento da lista
                 printf("Q-6 Exibe o k-esimo elemento\n");
                 printf("k: ");
-                __fpurge(stdin);
+                //__fpurge(stdin);
+                fpurge(stdin);
                 scanf("%d",&k);
                 printf("Chave: ");
                 exibeK(Lista,k);
@@ -328,7 +359,8 @@ int main() {
                 // Procura por um elemento da lista
                 printf("Q-7 Procura por um elemento\n");
                 printf("Chave: ");
-                __fpurge(stdin);
+                //__fpurge(stdin);
+                fpurge(stdin);
                 scanf("%d",&n);
                 if (procuraN(Lista,n))
                     printf("Elemento %d encontrado.\n", n);
@@ -364,7 +396,8 @@ int main() {
                 // Exclui o k-esimo elemento da lista
                 printf("Q-13 Exclui o k-esimo elemento\n");
                 printf("k: ");
-                __fpurge(stdin);
+                //__fpurge(stdin);
+                fpurge(stdin);
                 scanf("%d",&k);
                 excluiK(&Lista,k);
                 break;
@@ -372,7 +405,8 @@ int main() {
                 // Exclui um elemento procurado da lista
                 printf("Q-14 Exclui um elemento procurado\n");
                 printf("Chave: ");
-                __fpurge(stdin);
+                //__fpurge(stdin);
+                fpurge(stdin);
                 scanf("%d",&n);
                 excluiN(&Lista,n);
                 break;
@@ -386,4 +420,3 @@ int main() {
 #endif
     }
 }
-
