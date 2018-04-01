@@ -8,9 +8,6 @@
  */
 
 //TO FIX
-//  - 10 (media retorna nan)
-//  - 11 (acessa memoria errada)
-//  - 13 (não apaga nenhum elemento da lista)
 //  - 14 (não apaga nenhum elemento da lista)
 
 #include<stdio.h>
@@ -189,12 +186,15 @@ float media (No *Lista)
     float soma = 0, md;
     int i = 0;
     
-    while (aux->prox == NULL)
+    while (aux->prox != NULL)
     {
         i++;
         soma = soma + aux->chave;
         aux = aux->prox;
     }
+    //para somar ultimo elemento da lista e incrementar i para o ultimo elemento
+    soma = soma + aux->chave;
+    i++;
     md = soma / i;
     
     return md;
@@ -202,58 +202,60 @@ float media (No *Lista)
 
 // Questao 11
 void excluiPrimeiro (No **pLista) {
-    No *aux = *pLista;
+    No *aux = (*pLista);
     aux = aux->prox;
-    free(pLista);
+    free(aux);
     *pLista = aux;
 }
 
 // Questao 12
 void excluiUltimo (No **pLista) {
     No *aux = *pLista;
-    No *temp;
+    No *temp = *pLista;
     while (aux->prox != NULL) {
         temp = aux;
         aux = aux->prox;
     }
-    free(temp->prox);
-    temp->prox = NULL;
+    aux->prox = temp;
+    free(aux);
 }
 
 // Questao 13
 void excluiK (No **pLista, int k) {
     No *aux = *pLista;
-    No *temp;
-    int contador, busca = 1;
-    for (contador = 0; contador < k; contador++) {
-        if (aux->prox == NULL){
-            busca = 0;
-            break;
-        }
-        else {
+    No *temp = *pLista;
+    int contador;
+    
+    if (k == 0) excluiPrimeiro(pLista);
+    else {
+        for (contador = 0; contador < k; contador++) {
             temp = aux;
             aux = aux->prox;
         }
+        temp->prox = aux->prox;
+        free(aux);
     }
-    
 }
 
 // Questao 14
 void excluiN (No **pLista, int n) {
-    int busca = 0;
     No *aux = *pLista;
-    No *temp;
-    while (aux->prox != NULL) {
+    No *temp = *pLista;
+    
+    while (aux->prox != NULL)
+    {
+        if (aux->chave == n)
+        {
+            temp->prox = aux->prox;
+            free(aux);
+        }
         temp = aux;
         aux = aux->prox;
-        if (temp->chave == n) {
-            busca = 1;
-            break;
-        }
     }
-    if (busca == 0) printf("%i nao foi achado na lista\n", n);
-    else {
-        free(temp);
+    //condicional para ultimo elemento da lista
+    if (aux ->chave == n) {
+        temp->prox = aux->prox;
+        free(aux);
     }
     
 }
