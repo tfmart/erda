@@ -7,9 +7,6 @@
  *
  */
 
-//TO FIX
-//  - 14 (não apaga nenhum elemento da lista)
-
 #include<stdio.h>
 #include<stdio_ext.h>
 #include<stdlib.h>
@@ -211,13 +208,13 @@ void excluiPrimeiro (No **pLista) {
 // Questao 12
 void excluiUltimo (No **pLista) {
     No *aux = *pLista;
-    No *temp = *pLista;
+    No *temp;
     while (aux->prox != NULL) {
         temp = aux;
         aux = aux->prox;
     }
-    aux->prox = temp;
-    free(aux);
+    free(temp->prox);
+    temp->prox = NULL;
 }
 
 // Questao 13
@@ -241,23 +238,26 @@ void excluiK (No **pLista, int k) {
 void excluiN (No **pLista, int n) {
     No *aux = *pLista;
     No *temp = *pLista;
-    
-    while (aux->prox != NULL)
-    {
-        if (aux->chave == n)
-        {
-            temp->prox = aux->prox;
-            free(aux);
-        }
-        temp = aux;
-        aux = aux->prox;
+    if (aux ->chave == n) {
+        temp->prox = aux->prox;
+        free(aux);
     }
+    else {
+        while (aux->prox != NULL) {
+            if (aux->chave == n) {
+                temp->prox = aux->prox;
+                free(aux);
+            }
+            temp = aux;
+            aux = aux->prox;
+        }
+    }
+    
     //condicional para ultimo elemento da lista
     if (aux ->chave == n) {
         temp->prox = aux->prox;
         free(aux);
     }
-    
 }
 
 // Cria uma lista vazia
