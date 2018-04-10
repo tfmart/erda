@@ -1,1 +1,50 @@
-Poste aqui rascunhos de funções para que sejam compartilhadas e para ter fácil acesso pelos membros do grupo
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+
+
+
+void main() {
+
+
+	int n, **pm,k=0;
+
+	//Aloco vetor principal
+	pm = (int **)malloc(3 * sizeof(sizeof(int*)));
+	///////////////////////////////
+
+//Aloco cada vetor linha
+	for (n = 0; n < 3; n++) {
+
+		pm[n] = (int*)malloc(3 * sizeof(int));
+	}
+	/////////////////////////////
+
+	//preenche a matriz com valores quaisquers
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			pm[i][j] =k;
+                        k=k+1;
+		}
+	}
+
+	/////////////////////
+
+
+	//imprime a matriz
+
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			printf("%d", pm[i][j]);
+		}
+           printf("\n");
+	}
+
+	//////////////////////////////
+
+
+
+
+	system("pause");	
+}
