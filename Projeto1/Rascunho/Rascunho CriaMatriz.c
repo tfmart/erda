@@ -19,7 +19,7 @@ int criarMatriz(celula **lista, int linhas, int colunas, char nome[]) {
     if((linhas < 1 || linhas > 50) || (colunas < 1 || colunas > 50)) return 0;
     if (aux != NULL) {
         aux = *lista;
-        while (aux->prox) {
+        while (aux->prox == NULL) {
             if ((strcmp(aux->nomeMatriz, nome)) == 0) {
                 return 0;
                 break;
