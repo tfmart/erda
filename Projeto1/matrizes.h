@@ -1,19 +1,19 @@
 #ifndef MATRIZES_H_
 #define MATRIZES_H_
 
-typedef struct matriz Matriz;
+typedef struct No celula;
 
-Matriz declaracao;
+Matriz CM;
 //Permite a criação de uma matriz
 //ENTRADA: CM <nome sem espa os> <n mero de linhas> <n mero de colunas>
 //SAIDA: OK ou ERRO (caso matriz ja exista ou uma das dimensoes seja menor do que 1 ou maior que 50)
 
-Matriz destruir;
+Matriz DM;
 //Remove uma matriz
 //ENTDADA: DM <nome>
 //SAIDA: OK ou ERRO
 
-void imprimir;
+void IM;
 //Imprime uma matriz
 //ENTRADA: IM <nome>
 //SAIDA: a(1,1) ... a(1, m) (SEPARADOS POR ESPAÇO)
