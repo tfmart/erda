@@ -1,0 +1,80 @@
+void insereValor(no **Lista, int linhas, int colunas , char Nome[]) {
+
+	float info;
+	int cont = 0, ajuda = 0,linha,coluna, i;
+	no *aux = (*Lista);
+
+	no *novo = (no *)malloc(sizeof(no));
+
+
+	while (aux != NULL) {
+
+		if (strcmp(Nome, aux->NomeMatriz) == 0) {
+			cont++;
+			break;
+		}
+		aux = aux->prox;
+
+	}
+	if (cont == 1) {
+
+		printf("Em qual linha deseja inserir?\n");
+		scanf("%d", &linha);
+
+		if (linha > aux->linhas) {
+
+			printf("ERRO\n");
+
+			system("pause");
+		}
+		else {
+
+			printf("Em qual coluna deseja inserir?\n");
+			scanf("%d", &coluna);
+
+			if (coluna > aux->colunas) {
+
+				printf("ERRO\n");
+				system("pause");
+			}
+			else {
+
+				printf("Qual elemento deseja inserir?\n");
+				scanf("%f", &info);
+
+				aux->matriz[linha - 1][coluna - 1] = info;
+
+				printf("OK\n");
+				system("pause");
+			}
+		}
+	}
+	else {
+
+
+		printf("ERRO\n");
+		system("pause");
+	}
+
+}
+
+
+void main{
+
+case 2:
+
+			printf("Em qual Matriz deseja inserir um elemento?\n");
+
+			getchar();
+			scanf("%s", Nome);
+
+
+			
+
+			insereValor(&lista, linhas,colunas, Nome);
+			break;
+
+
+
+
+}
