@@ -1,0 +1,165 @@
+void AC(no **Lista, int colunas, char Nome[]) {
+
+	float info;
+	int cont = 0, coluna, i;
+	no * aux = (*Lista);
+	no * novo = (no*)malloc(sizeof(no));
+
+
+
+	while (aux != NULL) {
+
+		if (strcmp(Nome, aux->NomeMatriz) == 0) {
+			cont++;
+			break;
+
+		}
+		aux = aux->prox;
+	}
+
+	if (cont == 1) {
+
+		printf("Em qual coluna deseja inserir?\n");
+
+		scanf("%d", &coluna);
+
+
+		if (aux->colunas < coluna) {
+
+			printf("ERRO\n");
+			system("pause");
+		}
+
+		else {
+
+			printf("Quais Elementos?\n");
+
+			for (i = 0; i < aux->colunas; i++) {
+
+				if ((scanf("%f", &info) == 1)) {
+					aux->matriz[i][coluna-1] = info;
+				}
+				else {
+					break;
+				}
+			}
+
+			printf("OK\n");
+			system("pause");
+		}
+	}
+
+	else {
+
+		printf("ERRO\n");
+		system("pause");
+	}
+}
+
+
+
+
+void AL(no **Lista, int linhas, char Nome[]) {
+
+	float info;
+	int cont = 0, linha, i;
+	no * aux = (*Lista);
+	no * novo = (no*)malloc(sizeof(no));
+
+
+
+	while (aux != NULL) {
+
+		if (strcmp(Nome, aux->NomeMatriz) == 0) {
+			cont++;
+			break;
+
+		}
+		aux = aux->prox;
+	}
+
+	if (cont == 1) {
+
+		printf("Em qual linha deseja inserir?\n");
+
+		scanf("%d", &linha);
+
+
+		if (aux->linhas < linha) {
+
+			printf("ERRO\n");
+			system("pause");
+		}
+
+		else {
+
+			printf("Quais Elementos?\n");
+
+			for (i = 0; i < aux->colunas; i++) {
+
+				if ((scanf("%f", &info) == 1)) {
+					aux->matriz[linha-1][i] = info;
+				}
+				else {
+					break;
+				}
+			}
+
+			printf("OK\n");
+			system("pause");
+		}
+	}
+
+	else {
+
+		printf("ERRO\n");
+		system("pause");
+	}
+}
+
+
+
+
+void main{
+
+
+
+
+
+case 3:
+
+			printf("Em qual Matriz deseja atribuir uma linha?\n");
+
+			getchar();
+			scanf("%s", Nome);
+
+
+
+			AL(&lista, linhas, Nome);
+			break;
+
+
+
+		case 4:
+
+			printf("Em qual Matriz deseja atribuir uma coluna?\n");
+
+			getchar();
+			scanf("%s", Nome);
+
+
+			AC(&lista, colunas, Nome);
+			break;
+
+
+
+
+
+
+
+
+
+
+
+
+}
