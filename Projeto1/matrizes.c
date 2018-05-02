@@ -75,7 +75,7 @@ int DM(celula **lista, char nome[]) {
     return 0;
 }
 
-int buscaMatriz(celula **lista, char nome[]) {
+int IM(celula **lista, char nome[]) {
     celula *aux = *lista;
     int c1, c2;
     
@@ -117,272 +117,272 @@ void atribuirLinha{
 
 int TM(**lista,char nome, char nome-resultado)
 {
-  celula *aux = *lista;
-  int i,j;
-  float **matriz-resultante = NULL;
-
-//buscar matriz conforme o nome
-  if(aux == NULL)
-  {
-     return "ERRO";
-  }
-  else
-  {
-    while(aux->prox != NULL)
+    celula *aux = *lista;
+    int i,j;
+    float **matriz-resultante = NULL;
+    
+    //buscar matriz conforme o nome
+    if(aux == NULL)
     {
-      if(strcmp(aux->nomeMatriz,nome) == 0)
-      { //montando a matriz-resultante sendo o inverso de LxC de matriz
+        return "ERRO";
+    }
+    else
+    {
+        while(aux->prox != NULL)
+        {
+            if(strcmp(aux->nomeMatriz,nome) == 0)
+            { //montando a matriz-resultante sendo o inverso de LxC de matriz
+                *matriz-resultante = malloc(aux->colunas * sizeof(float *));
+                
+                for(i=0;i< aux->linhas;i++)
+                {
+                    matriz-resultante[i] = malloc(aux->linhas * sizeof(float));
+                }
+                //transpondo as matrizes
+                for(i=0; i< aux->linhas;i++)
+                {
+                    for(j=0;j<aux->colunas;j++)
+                    {
+                        matriz-resultante[j][i] = aux->matriz[i][j]
+                    }
+                }
+                
+                //printando a matriz resultante
+                for(i=0; i< aux->linhas;i++)
+                {
+                    for(j=0;j<aux->colunas;j++)
+                    {
+                        printf("%i ",matriz-resultante[i][j]);
+                    }
+                    printf("/n");
+                }
+                return;
+            }
+            aux = aux->prox;
+        }
+    }
+    
+    //para ultimo elemento da lista de matrizes existentes
+    if(strcmp(aux->nomeMatriz,nome)==0)
+    {
         *matriz-resultante = malloc(aux->colunas * sizeof(float *));
-
+        
         for(i=0;i< aux->linhas;i++)
         {
-          matriz-resultante[i] = malloc(aux->linhas * sizeof(float));
+            matriz-resultante[i] = malloc(aux->linhas * sizeof(float));
         }
         //transpondo as matrizes
         for(i=0; i< aux->linhas;i++)
         {
-          for(j=0;j<aux->colunas;j++)
-          {
-            matriz-resultante[j][i] = aux->matriz[i][j]
-          }
+            for(j=0;j<aux->colunas;j++)
+            {
+                matriz-resultante[j][i] = aux->matriz[i][j]
+            }
         }
-
-        //printando a matriz resultante
         for(i=0; i< aux->linhas;i++)
         {
-          for(j=0;j<aux->colunas;j++)
-          {
-            printf("%i ",matriz-resultante[i][j]);
-          }
+            for(j=0;j<aux->colunas;j++)
+            {
+                printf("%i ",matriz-resultante[i][j]);
+            }
             printf("/n");
         }
         return;
-      }
-      aux = aux->prox;
     }
-  }
-
-  //para ultimo elemento da lista de matrizes existentes
-  if(strcmp(aux->nomeMatriz,nome)==0)
-  {
-    *matriz-resultante = malloc(aux->colunas * sizeof(float *));
-
-    for(i=0;i< aux->linhas;i++)
-    {
-      matriz-resultante[i] = malloc(aux->linhas * sizeof(float));
-    }
-    //transpondo as matrizes
-    for(i=0; i< aux->linhas;i++)
-    {
-      for(j=0;j<aux->colunas;j++)
-      {
-        matriz-resultante[j][i] = aux->matriz[i][j]
-      }
-    }
-    for(i=0; i< aux->linhas;i++)
-    {
-      for(j=0;j<aux->colunas;j++)
-      {
-        printf("%i ",matriz-resultante[i][j]);
-      }
-        printf("/n");
-    }
-    return;
-  }
-  else
-  {  return "ERRO";}
+    else
+    {  return "ERRO";}
 }
 
 
 int SM(**lista,char nome[],char nome1[],char nome-resultado)
 {
-  celula **aux = *lista;
-  int i,j;
-  float **matriz-resultante = NULL;
-  int achou1=0,achou2=0;
-
-  if(aux == NULL)
-  {
-    return "ERRO";
-  }
-  else
-  {//procura a primeira matriz
-    while(aux->prox !=NULL)
+    celula **aux = *lista;
+    int i,j;
+    float **matriz-resultante = NULL;
+    int achou1=0,achou2=0;
+    
+    if(aux == NULL)
     {
-      if(strcmp(aux->nomeMatriz, nome)==0)
-      {
-        achou1 = 1;
-         break;
-      }
-
-      aux = aux->prox;
-    }
-    //se nao achar a matriz antes da ultima posicao
-    if(achou1 == 0)
-    {
-      if(strcmp(aux->nomeMatriz, nome)==0)
-      {//procura a segunda matriz
-        while(*aux->prox != NULL)
-        {
-          if(strcmp(*aux->nomeMatriz,nome1)==0)
-          {
-            achou2==1
-            break;
-          }
-          *aux=*aux->prox;
-        }
-      }
-      else
-      {
         return "ERRO";
-      }
     }
-
-    //verifica ultima posicao da segunda matriz
-    if(achou2 == 0)
-    {
-      if(strcmp(*aux->nomeMatriz,nome1)==0)
-      {
-        achou2 = 1;
-      }
-      else
-      {
-        return "ERRO";
-      }
-    }
-
-    //se encontrar as duas matrizes
-    if(achou1 == 1 && achou2 == 1)
-    { //verifica se as matrizes tem o mesmo tamanho
-      if(aux->linhaMatriz == *aux->linhaMatriz && aux->colunaMatriz == *aux->colunaMatriz)
-      {
-          *matriz-resultante = malloc(aux->linas * sizeof(float *));
-
-          for(j=0;j< aux->linhas;i++)
-          {
-            matriz-resultante[j] = malloc(aux->colunas * sizeof(float));
-          }
-          //somando as matrizes
-          for(i=0; i< aux->linhaMatriz;i++)
-          {
-            for(j=0; j< aux->colunaMatriz;j++)
-            {
-              matriz-resultante[i][j] = aux->matriz[i][j] + *aux->matriz[i][j];
-            }
-          }
-          for(i=0; i< aux->linhas;i++)
-          {
-            for(j=0;j<aux->colunas;j++)
-            {
-              printf("%i ",matriz-resultante[i][j]);
-            }
-              printf("/n");
-          }
-          return;
-        }
-        else
+    else
+    {//procura a primeira matriz
+        while(aux->prox !=NULL)
         {
-          return "ERRO";
+            if(strcmp(aux->nomeMatriz, nome)==0)
+            {
+                achou1 = 1;
+                break;
+            }
+            
+            aux = aux->prox;
         }
-      }
+        //se nao achar a matriz antes da ultima posicao
+        if(achou1 == 0)
+        {
+            if(strcmp(aux->nomeMatriz, nome)==0)
+            {//procura a segunda matriz
+                while(*aux->prox != NULL)
+                {
+                    if(strcmp(*aux->nomeMatriz,nome1)==0)
+                    {
+                        achou2==1
+                        break;
+                    }
+                    *aux=*aux->prox;
+                }
+            }
+            else
+            {
+                return "ERRO";
+            }
+        }
+        
+        //verifica ultima posicao da segunda matriz
+        if(achou2 == 0)
+        {
+            if(strcmp(*aux->nomeMatriz,nome1)==0)
+            {
+                achou2 = 1;
+            }
+            else
+            {
+                return "ERRO";
+            }
+        }
+        
+        //se encontrar as duas matrizes
+        if(achou1 == 1 && achou2 == 1)
+        { //verifica se as matrizes tem o mesmo tamanho
+            if(aux->linhaMatriz == *aux->linhaMatriz && aux->colunaMatriz == *aux->colunaMatriz)
+            {
+                *matriz-resultante = malloc(aux->linas * sizeof(float *));
+                
+                for(j=0;j< aux->linhas;i++)
+                {
+                    matriz-resultante[j] = malloc(aux->colunas * sizeof(float));
+                }
+                //somando as matrizes
+                for(i=0; i< aux->linhaMatriz;i++)
+                {
+                    for(j=0; j< aux->colunaMatriz;j++)
+                    {
+                        matriz-resultante[i][j] = aux->matriz[i][j] + *aux->matriz[i][j];
+                    }
+                }
+                for(i=0; i< aux->linhas;i++)
+                {
+                    for(j=0;j<aux->colunas;j++)
+                    {
+                        printf("%i ",matriz-resultante[i][j]);
+                    }
+                    printf("/n");
+                }
+                return;
+            }
+            else
+            {
+                return "ERRO";
+            }
+        }
     }
-  }
+}
 
 
 int DV(**lista,char nome[],char nome1[],char nome-resultado)
 {
-  celula **aux = *lista;
-  int i,j;
-  float **matriz-resultante = NULL;
-  int achou1=0,achou2=0;
-
-  if(aux == NULL)
-  {
-    return "ERRO";
-  }
-  else
-  {//procura a primeira matriz
-    while(aux->prox !=NULL)
+    celula **aux = *lista;
+    int i,j;
+    float **matriz-resultante = NULL;
+    int achou1=0,achou2=0;
+    
+    if(aux == NULL)
     {
-      if(strcmp(aux->nomeMatriz, nome)==0)
-      {
-        achou1 = 1;
-         break;
-      }
-
-      aux = aux->prox;
-    }
-    //se nao achar a matriz antes da ultima posicao
-    if(achou1 == 0)
-    {
-      if(strcmp(aux->nomeMatriz, nome)==0)
-      {
-        while(*aux->prox != NULL)
-        {
-          if(strcmp(*aux->nomeMatriz,nome1)==0)
-          {
-            achou2==1
-            break;
-          }
-          *aux=*aux->prox;
-        }
-      }
-      else
-      {
         return "ERRO";
-      }
     }
-
-    //verifica ultima posicao
-    if(achou2 == 0)
-    {
-      if(strcmp(*aux->nomeMatriz,nome1)==0)
-      {
-        achou2 = 1;
-      }
-      else
-      {
-        return "ERRO";
-      }
-    }
-
-    //se encontrar as duas matrizes
-    if(achou1 == 1 && achou2 == 1)
-    { //verifica se as matrizes tem o mesmo tamanho
-      if(aux->linhaMatriz == *aux->linhaMatriz && aux->colunaMatriz == *aux->colunaMatriz)
-      {
-          *matriz-resultante = malloc(aux->linas * sizeof(float *));
-
-          for(j=0;j< aux->linhas;i++)
-          {
-            matriz-resultante[j] = malloc(aux->colunas * sizeof(float));
-          }
-          //dividindo as matrizes
-          for(i=0; i< aux->linhaMatriz;i++)
-          {
-            for(j=0; j< aux->colunaMatriz;j++)
-            {
-              matriz-resultante[i][j] = aux->matriz[i][j] / *aux->matriz[i][j];
-            }
-          }
-          for(i=0; i< aux->linhas;i++)
-          {
-            for(j=0;j<aux->colunas;j++)
-            {
-              printf("%i ",matriz-resultante[i][j]);
-            }
-              printf("/n");
-          }
-          return;
-        }
-        else
+    else
+    {//procura a primeira matriz
+        while(aux->prox !=NULL)
         {
-          return "ERRO";
+            if(strcmp(aux->nomeMatriz, nome)==0)
+            {
+                achou1 = 1;
+                break;
+            }
+            
+            aux = aux->prox;
         }
-
-      }
+        //se nao achar a matriz antes da ultima posicao
+        if(achou1 == 0)
+        {
+            if(strcmp(aux->nomeMatriz, nome)==0)
+            {
+                while(*aux->prox != NULL)
+                {
+                    if(strcmp(*aux->nomeMatriz,nome1)==0)
+                    {
+                        achou2==1
+                        break;
+                    }
+                    *aux=*aux->prox;
+                }
+            }
+            else
+            {
+                return "ERRO";
+            }
+        }
+        
+        //verifica ultima posicao
+        if(achou2 == 0)
+        {
+            if(strcmp(*aux->nomeMatriz,nome1)==0)
+            {
+                achou2 = 1;
+            }
+            else
+            {
+                return "ERRO";
+            }
+        }
+        
+        //se encontrar as duas matrizes
+        if(achou1 == 1 && achou2 == 1)
+        { //verifica se as matrizes tem o mesmo tamanho
+            if(aux->linhaMatriz == *aux->linhaMatriz && aux->colunaMatriz == *aux->colunaMatriz)
+            {
+                *matriz-resultante = malloc(aux->linas * sizeof(float *));
+                
+                for(j=0;j< aux->linhas;i++)
+                {
+                    matriz-resultante[j] = malloc(aux->colunas * sizeof(float));
+                }
+                //dividindo as matrizes
+                for(i=0; i< aux->linhaMatriz;i++)
+                {
+                    for(j=0; j< aux->colunaMatriz;j++)
+                    {
+                        matriz-resultante[i][j] = aux->matriz[i][j] / *aux->matriz[i][j];
+                    }
+                }
+                for(i=0; i< aux->linhas;i++)
+                {
+                    for(j=0;j<aux->colunas;j++)
+                    {
+                        printf("%i ",matriz-resultante[i][j]);
+                    }
+                    printf("/n");
+                }
+                return;
+            }
+            else
+            {
+                return "ERRO";
+            }
+            
+        }
     }
-  }
+}
 
 void multMatriz1{
     
@@ -390,96 +390,96 @@ void multMatriz1{
 
 int ME(**lista,char nome[],char nome1[],char nome-resultado)
 {
-  celula **aux = *lista;
-  int i,j;
-  float **matriz-resultante = NULL;
-  int achou1=0,achou2=0;
-
-  if(aux == NULL)
-  {
-    return "ERRO";
-  }
-  else
-  {//procura a primeira matriz
-    while(aux->prox !=NULL)
+    celula **aux = *lista;
+    int i,j;
+    float **matriz-resultante = NULL;
+    int achou1=0,achou2=0;
+    
+    if(aux == NULL)
     {
-      if(strcmp(aux->nomeMatriz, nome)==0)
-      {
-        achou1 = 1;
-         break;
-      }
-
-      aux = aux->prox;
-    }
-    //se nao achar a matriz antes da ultima posicao
-    if(achou1 == 0)
-    {
-      if(strcmp(aux->nomeMatriz, nome)==0)
-      {
-        while(*aux->prox != NULL)
-        {
-          if(strcmp(*aux->nomeMatriz,nome1)==0)
-          {
-            achou2==1
-            break;
-          }
-          *aux=*aux->prox;
-        }
-      }
-      else
-      {
         return "ERRO";
-      }
     }
-
-    //verifica ultima posicao
-    if(achou2 == 0)
-    {
-      if(strcmp(*aux->nomeMatriz,nome1)==0)
-      {
-        achou2 = 1;
-      }
-      else
-      {
-        return "ERRO";
-      }
-    }
-
-    //se encontrar as duas matrizes
-    if(achou1 == 1 && achou2 == 1)
-    { //verifica se as matrizes tem o mesmo tamanho
-      if(aux->linhaMatriz == *aux->linhaMatriz && aux->colunaMatriz == *aux->colunaMatriz)
-      {
-          *matriz-resultante = malloc(aux->linas * sizeof(float *));
-
-          for(j=0;j< aux->linhas;i++)
-          {
-            matriz-resultante[j] = malloc(aux->colunas * sizeof(float));
-          }
-          //multiplicando as matrizes
-          for(i=0; i< aux->linhaMatriz;i++)
-          {
-            for(j=0; j< aux->colunaMatriz;j++)
-            {
-              matriz-resultante[i][j] = aux->matriz[i][j] * *aux->matriz[i][j];
-            }
-          }
-          for(i=0; i< aux->linhas;i++)
-          {
-            for(j=0;j<aux->colunas;j++)
-            {
-              printf("%i ",matriz-resultante[i][j]);
-            }
-              printf("/n");
-          }
-          return;
-        }
-        else
+    else
+    {//procura a primeira matriz
+        while(aux->prox !=NULL)
         {
-          return "ERRO";
+            if(strcmp(aux->nomeMatriz, nome)==0)
+            {
+                achou1 = 1;
+                break;
+            }
+            
+            aux = aux->prox;
         }
-
-      }
+        //se nao achar a matriz antes da ultima posicao
+        if(achou1 == 0)
+        {
+            if(strcmp(aux->nomeMatriz, nome)==0)
+            {
+                while(*aux->prox != NULL)
+                {
+                    if(strcmp(*aux->nomeMatriz,nome1)==0)
+                    {
+                        achou2==1
+                        break;
+                    }
+                    *aux=*aux->prox;
+                }
+            }
+            else
+            {
+                return "ERRO";
+            }
+        }
+        
+        //verifica ultima posicao
+        if(achou2 == 0)
+        {
+            if(strcmp(*aux->nomeMatriz,nome1)==0)
+            {
+                achou2 = 1;
+            }
+            else
+            {
+                return "ERRO";
+            }
+        }
+        
+        //se encontrar as duas matrizes
+        if(achou1 == 1 && achou2 == 1)
+        { //verifica se as matrizes tem o mesmo tamanho
+            if(aux->linhaMatriz == *aux->linhaMatriz && aux->colunaMatriz == *aux->colunaMatriz)
+            {
+                *matriz-resultante = malloc(aux->linas * sizeof(float *));
+                
+                for(j=0;j< aux->linhas;i++)
+                {
+                    matriz-resultante[j] = malloc(aux->colunas * sizeof(float));
+                }
+                //multiplicando as matrizes
+                for(i=0; i< aux->linhaMatriz;i++)
+                {
+                    for(j=0; j< aux->colunaMatriz;j++)
+                    {
+                        matriz-resultante[i][j] = aux->matriz[i][j] * *aux->matriz[i][j];
+                    }
+                }
+                for(i=0; i< aux->linhas;i++)
+                {
+                    for(j=0;j<aux->colunas;j++)
+                    {
+                        printf("%i ",matriz-resultante[i][j]);
+                    }
+                    printf("/n");
+                }
+                return;
+            }
+            else
+            {
+                return "ERRO";
+            }
+            
+        }
     }
-  }
+}
 
