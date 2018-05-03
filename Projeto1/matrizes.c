@@ -1,6 +1,6 @@
-#define <stdio.h>
-#define <string.h>
-#define "matrizes.h"
+#include <stdio.h>
+#include <string.h>
+#include "matrizes.h"
 
 struct No {
     char nomeMatriz[20];
@@ -8,6 +8,8 @@ struct No {
     float **matriz;
     struct No *prox;
 };
+
+typedef struct No celula;
 
 int CM(celula **lista, int linhas, int colunas, char nome[]) {
     celula *aux = (*lista);
@@ -107,19 +109,23 @@ int IM(celula **lista, char nome[]) {
     return 0;
 }
 
-void atribuirElemento {
-    
+void AE(void) {
+    printf("Not done yet\n");
 }
 
-void atribuirLinha{
-    
+void AL(void) {
+    printf("Not done yet\n");
 }
 
-int TM(**lista,char nome, char nome-resultado)
+void AC(void) {
+    printf("Not done yet\n");
+}
+
+int TM(celula **lista,char nome, char nomeResultado)
 {
     celula *aux = *lista;
     int i,j;
-    float **matriz-resultante = NULL;
+    float **matrizResultante = NULL;
     
     //buscar matriz conforme o nome
     if(aux == NULL)
@@ -132,18 +138,18 @@ int TM(**lista,char nome, char nome-resultado)
         {
             if(strcmp(aux->nomeMatriz,nome) == 0)
             { //montando a matriz-resultante sendo o inverso de LxC de matriz
-                *matriz-resultante = malloc(aux->colunas * sizeof(float *));
+                *matrizResultante = malloc(aux->colunas * sizeof(float *));
                 
                 for(i=0;i< aux->linhas;i++)
                 {
-                    matriz-resultante[i] = malloc(aux->linhas * sizeof(float));
+                    matrizResultante[i] = malloc(aux->linhas * sizeof(float));
                 }
                 //transpondo as matrizes
                 for(i=0; i< aux->linhas;i++)
                 {
                     for(j=0;j<aux->colunas;j++)
                     {
-                        matriz-resultante[j][i] = aux->matriz[i][j]
+                        matrizResultante[j][i] = aux->matriz[i][j];
                     }
                 }
                 
@@ -152,7 +158,7 @@ int TM(**lista,char nome, char nome-resultado)
                 {
                     for(j=0;j<aux->colunas;j++)
                     {
-                        printf("%i ",matriz-resultante[i][j]);
+                        printf("%i ",matrizResultante[i][j]);
                     }
                     printf("/n");
                 }
@@ -165,25 +171,25 @@ int TM(**lista,char nome, char nome-resultado)
     //para ultimo elemento da lista de matrizes existentes
     if(strcmp(aux->nomeMatriz,nome)==0)
     {
-        *matriz-resultante = malloc(aux->colunas * sizeof(float *));
+        *matrizResultante = malloc(aux->colunas * sizeof(float *));
         
         for(i=0;i< aux->linhas;i++)
         {
-            matriz-resultante[i] = malloc(aux->linhas * sizeof(float));
+            matrizResultante[i] = malloc(aux->linhas * sizeof(float));
         }
         //transpondo as matrizes
         for(i=0; i< aux->linhas;i++)
         {
             for(j=0;j<aux->colunas;j++)
             {
-                matriz-resultante[j][i] = aux->matriz[i][j]
+                matrizResultante[j][i] = aux->matriz[i][j];
             }
         }
         for(i=0; i< aux->linhas;i++)
         {
             for(j=0;j<aux->colunas;j++)
             {
-                printf("%i ",matriz-resultante[i][j]);
+                printf("%i ",matrizResultante[i][j]);
             }
             printf("/n");
         }
@@ -194,11 +200,11 @@ int TM(**lista,char nome, char nome-resultado)
 }
 
 
-int SM(**lista,char nome[],char nome1[],char nome-resultado)
+int SM(celula **lista,char nome[],char nome1[],char nomeResultado)
 {
-    celula **aux = *lista;
+    celula *aux = *lista;
     int i,j;
-    float **matriz-resultante = NULL;
+    float **matrizResultante = NULL;
     int achou1=0,achou2=0;
     
     if(aux == NULL)
@@ -222,11 +228,11 @@ int SM(**lista,char nome[],char nome1[],char nome-resultado)
         {
             if(strcmp(aux->nomeMatriz, nome)==0)
             {//procura a segunda matriz
-                while(*aux->prox != NULL)
+                while(aux->prox != NULL)
                 {
                     if(strcmp(*aux->nomeMatriz,nome1)==0)
                     {
-                        achou2==1
+                        achou2==1;
                         break;
                     }
                     *aux=*aux->prox;
@@ -254,27 +260,27 @@ int SM(**lista,char nome[],char nome1[],char nome-resultado)
         //se encontrar as duas matrizes
         if(achou1 == 1 && achou2 == 1)
         { //verifica se as matrizes tem o mesmo tamanho
-            if(aux->linhaMatriz == *aux->linhaMatriz && aux->colunaMatriz == *aux->colunaMatriz)
+            if(aux->linhas == aux->linhas && aux->colunas == aux->colunas)
             {
-                *matriz-resultante = malloc(aux->linas * sizeof(float *));
+                *matrizResultante = malloc(aux->linhas * sizeof(float *));
                 
                 for(j=0;j< aux->linhas;i++)
                 {
-                    matriz-resultante[j] = malloc(aux->colunas * sizeof(float));
+                    matrizResultante[j] = malloc(aux->colunas * sizeof(float));
                 }
                 //somando as matrizes
-                for(i=0; i< aux->linhaMatriz;i++)
+                for(i=0; i< aux->linhas;i++)
                 {
-                    for(j=0; j< aux->colunaMatriz;j++)
+                    for(j=0; j< aux->colunas;j++)
                     {
-                        matriz-resultante[i][j] = aux->matriz[i][j] + *aux->matriz[i][j];
+                        matrizResultante[i][j] = aux->matriz[i][j] + aux->matriz[i][j];
                     }
                 }
                 for(i=0; i< aux->linhas;i++)
                 {
                     for(j=0;j<aux->colunas;j++)
                     {
-                        printf("%i ",matriz-resultante[i][j]);
+                        printf("%i ",matrizResultante[i][j]);
                     }
                     printf("/n");
                 }
@@ -289,11 +295,11 @@ int SM(**lista,char nome[],char nome1[],char nome-resultado)
 }
 
 
-int DV(**lista,char nome[],char nome1[],char nome-resultado)
+int DV(celula **lista,char nome[],char nome1[],char nomeResultado)
 {
-    celula **aux = *lista;
+    celula *aux = *lista;
     int i,j;
-    float **matriz-resultante = NULL;
+    float **matrizResultante = NULL;
     int achou1=0,achou2=0;
     
     if(aux == NULL)
@@ -317,11 +323,11 @@ int DV(**lista,char nome[],char nome1[],char nome-resultado)
         {
             if(strcmp(aux->nomeMatriz, nome)==0)
             {
-                while(*aux->prox != NULL)
+                while(aux->prox != NULL)
                 {
                     if(strcmp(*aux->nomeMatriz,nome1)==0)
                     {
-                        achou2==1
+                        achou2==1;
                         break;
                     }
                     *aux=*aux->prox;
@@ -349,27 +355,27 @@ int DV(**lista,char nome[],char nome1[],char nome-resultado)
         //se encontrar as duas matrizes
         if(achou1 == 1 && achou2 == 1)
         { //verifica se as matrizes tem o mesmo tamanho
-            if(aux->linhaMatriz == *aux->linhaMatriz && aux->colunaMatriz == *aux->colunaMatriz)
+            if(aux->linhas == aux->linhas && aux->colunas == aux->colunas)
             {
-                *matriz-resultante = malloc(aux->linas * sizeof(float *));
+                *matrizResultante = malloc(aux->linhas * sizeof(float *));
                 
                 for(j=0;j< aux->linhas;i++)
                 {
-                    matriz-resultante[j] = malloc(aux->colunas * sizeof(float));
+                    matrizResultante[j] = malloc(aux->colunas * sizeof(float));
                 }
                 //dividindo as matrizes
-                for(i=0; i< aux->linhaMatriz;i++)
-                {
-                    for(j=0; j< aux->colunaMatriz;j++)
-                    {
-                        matriz-resultante[i][j] = aux->matriz[i][j] / *aux->matriz[i][j];
-                    }
-                }
                 for(i=0; i< aux->linhas;i++)
                 {
-                    for(j=0;j<aux->colunas;j++)
+                    for(j=0; j< aux->colunas;j++)
                     {
-                        printf("%i ",matriz-resultante[i][j]);
+                        matrizResultante[i][j] = aux->matriz[i][j] / aux->matriz[i][j];
+                    }
+                }
+                for(i=0; i < aux->linhas;i++)
+                {
+                    for(j=0; j<  aux->colunas; j++)
+                    {
+                        printf("%i ",matrizResultante[i][j]);
                     }
                     printf("/n");
                 }
@@ -384,15 +390,15 @@ int DV(**lista,char nome[],char nome1[],char nome-resultado)
     }
 }
 
-void multMatriz1{
-    
+void MM(void){
+    printf("Not done yet\n");
 }
 
-int ME(**lista,char nome[],char nome1[],char nome-resultado)
+int ME(celula **lista,char nome[],char nome1[],char nomeResultado)
 {
-    celula **aux = *lista;
+    celula *aux = *lista;
     int i,j;
-    float **matriz-resultante = NULL;
+    float **matrizResultante = NULL;
     int achou1=0,achou2=0;
     
     if(aux == NULL)
@@ -416,11 +422,11 @@ int ME(**lista,char nome[],char nome1[],char nome-resultado)
         {
             if(strcmp(aux->nomeMatriz, nome)==0)
             {
-                while(*aux->prox != NULL)
+                while(aux->prox != NULL)
                 {
                     if(strcmp(*aux->nomeMatriz,nome1)==0)
                     {
-                        achou2==1
+                        achou2==1;
                         break;
                     }
                     *aux=*aux->prox;
@@ -448,27 +454,27 @@ int ME(**lista,char nome[],char nome1[],char nome-resultado)
         //se encontrar as duas matrizes
         if(achou1 == 1 && achou2 == 1)
         { //verifica se as matrizes tem o mesmo tamanho
-            if(aux->linhaMatriz == *aux->linhaMatriz && aux->colunaMatriz == *aux->colunaMatriz)
+            if(aux->linhas == aux->linhas && aux->colunas == aux->colunas)
             {
-                *matriz-resultante = malloc(aux->linas * sizeof(float *));
+                *matrizResultante = malloc(aux->linhas * sizeof(float *));
                 
                 for(j=0;j< aux->linhas;i++)
                 {
-                    matriz-resultante[j] = malloc(aux->colunas * sizeof(float));
+                    matrizResultante[j] = malloc(aux->colunas * sizeof(float));
                 }
                 //multiplicando as matrizes
-                for(i=0; i< aux->linhaMatriz;i++)
+                for(i=0; i< aux->linhas;i++)
                 {
-                    for(j=0; j< aux->colunaMatriz;j++)
+                    for(j=0; j< aux->colunas;j++)
                     {
-                        matriz-resultante[i][j] = aux->matriz[i][j] * *aux->matriz[i][j];
+                        matrizResultante[i][j] = aux->matriz[i][j] * aux->matriz[i][j];
                     }
                 }
                 for(i=0; i< aux->linhas;i++)
                 {
                     for(j=0;j<aux->colunas;j++)
                     {
-                        printf("%i ",matriz-resultante[i][j]);
+                        printf("%i ",matrizResultante[i][j]);
                     }
                     printf("/n");
                 }
@@ -481,5 +487,9 @@ int ME(**lista,char nome[],char nome1[],char nome-resultado)
             
         }
     }
+}
+
+void FE(void) {
+    return 0;
 }
 
