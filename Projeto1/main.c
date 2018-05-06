@@ -40,7 +40,7 @@ int main()
 
       case IM://IM <nome>
               scanf("%s",nome);
-              if (buscaMatriz(&lista, nome) == 0)
+              if (imprimirMatriz(&lista, nome) == 0)
               else printf("ERRO\n");
               break;
 
