@@ -196,7 +196,7 @@ void atribuirColuna(celula **Lista, int colunas, char Nome[]) {
 
 
 		if (aux->colunas < coluna) {
-			retunr 1;
+			return 1;
 		}
 
 		else {
@@ -512,61 +512,6 @@ int dividirMatriz(char nome[],char nome1[],char nomeResultado[])
         }
     }
 }
-
-
-// int MM(char nome1[], char nome2[], char nomeResultado[]){
-//     celula *matriz1 = NULL, *matriz2 = NULL;
-//     celula *aux = *lista;
-//     celula *novo = (celula*)malloc(sizeof(celula));
-//     float **matrizResultante = NULL;
-//     int busca = 0, contador = 0, contador2 = 0, contador3 = 0;
-    
-//     //validacao das matrizes
-//     if(aux == NULL) return 0;
-//     while (aux != NULL) {
-//         if(strcmp(aux->nomeMatriz, nome1) == 0) {
-//             matriz1 = aux;
-//             busca++;
-//         }
-//         if(strcmp(aux->nomeMatriz, nome2) == 0) {
-//             matriz2 = aux;
-//             busca++;
-//         }
-//         if(strcmp(aux->nomeMatriz, nomeResultado) == 0) return 0;
-//         aux = aux->prox;
-//     }
-//     if(busca != 2) return 0;
-//     if(matriz1->colunas != matriz2->linhas) return 0;
-
-//     //cria a nova matriz
-//     strcpy(novo->nomeMatriz, nomeResultado);
-//     novo->linhas = matriz1->linhas;
-//     novo->colunas = matriz2->colunas;
-//     novo->matriz = (float**)malloc(novo->linhas * sizeof(sizeof(float*)));
-//     for (contador = 0; contador < novo->colunas; contador++) {
-//         novo->matriz[contador] = (float*)malloc(novo->colunas * sizeof(float));
-//     }
-//     novo->prox = NULL;
-
-//     //multiplicacao da matriz
-//     for(contador = 0; contador < novo->linhas; contador++) {
-//         for (contador2 = 0; contador2 < novo->linhas; contador2++) {
-//             for (contador3 = 0; contador3 < novo->colunas; contador3++)
-//             novo->matriz[contador][contador2] += (matriz1->matriz[contador][contador3] * matriz2->matriz[contador3][contador2]);
-//         }
-//     }
-
-//     //imprime a matriz
-//     for (contador = 0; contador < novo->linhas; contador++) {
-//         for (contador2 = 0; contador2 < novo->colunas; contador2++) {
-//             printf("%6.2f ", novo->matriz[contador][contador2]);
-//         }
-//         printf("\n");
-//     }
-
-//     return 1;
-//     printf("Not done yet\n");
-// }
 
 int multiplicarMatriz(celula **lista,char nome[],char nome1[],char nomeResultado)
 {
