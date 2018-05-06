@@ -160,7 +160,7 @@ int TM(celula **lista,char nome, char nomeResultado)
                     {
                         printf("%i ",matrizResultante[i][j]);
                     }
-                    printf("/n");
+                    printf("\n");
                 }
                 return;
             }
@@ -191,7 +191,7 @@ int TM(celula **lista,char nome, char nomeResultado)
             {
                 printf("%i ",matrizResultante[i][j]);
             }
-            printf("/n");
+            printf("\n");
         }
         return;
     }
@@ -282,7 +282,7 @@ int SM(celula **lista,char nome[],char nome1[],char nomeResultado)
                     {
                         printf("%i ",matrizResultante[i][j]);
                     }
-                    printf("/n");
+                    printf("\n");
                 }
                 return;
             }
@@ -377,7 +377,7 @@ int DV(celula **lista,char nome[],char nome1[],char nomeResultado)
                     {
                         printf("%i ",matrizResultante[i][j]);
                     }
-                    printf("/n");
+                    printf("\n");
                 }
                 return;
             }
@@ -476,7 +476,7 @@ int ME(celula **lista,char nome[],char nome1[],char nomeResultado)
                     {
                         printf("%i ",matrizResultante[i][j]);
                     }
-                    printf("/n");
+                    printf("\n");
                 }
                 return;
             }
