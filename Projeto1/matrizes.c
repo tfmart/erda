@@ -11,7 +11,7 @@ struct No {
 
 celula **lista = NULL;
 
-int CM(int linhas, int colunas, char nome[]) {
+int criarMatriz(int linhas, int colunas, char nome[]) {
     celula *aux = (*lista);
     celula *aux2 = (*lista);
     celula *novo = (celula*)malloc(sizeof(celula));
@@ -47,7 +47,7 @@ int CM(int linhas, int colunas, char nome[]) {
     return 1;
 }
 
-int DM(char nome[]) {
+int destruirMatriz(char nome[]) {
     celula *aux = *lista;
     celula *temp = *lista;
     //condicao para primeiro elemento da lista
@@ -77,7 +77,7 @@ int DM(char nome[]) {
     return 0;
 }
 
-int IM(char nome[]) {
+int imprimirMatriz(char nome[]) {
     celula *aux = *lista;
     int c1, c2;
     
@@ -109,7 +109,7 @@ int IM(char nome[]) {
     return 0;
 }
 
-int AE(char nome[], int linha, int coluna, float n) {
+int atribuirElemento(char nome[], int linha, int coluna, float n) {
     int val = 0;    //validacao
     //Procura pelo vetor
     celula *aux = *lista;
@@ -120,16 +120,14 @@ int AE(char nome[], int linha, int coluna, float n) {
         }
     }
     if(val == 0 || linha >= aux->linhas || linha < 0 || coluna >= aux->colunas || coluna < 0) {
-        printf("ERRO\n"); 
         return 0;
     }
     aux->matriz[linha-1][coluna-1] = n;
-    printf("OK");
     return 1;
 
 }
 
-void AL(celula **Lista, int linhas, char Nome[]) {
+void atribuirLinha(celula **Lista, int linhas, char Nome[]) {
 
 	float info;
 	int cont = 0, linha, i;
@@ -151,8 +149,7 @@ void AL(celula **Lista, int linhas, char Nome[]) {
 		printf("Em qual linha deseja inserir?\n");
 		scanf("%d", &linha);
 		if (aux->linhas < linha) {
-			printf("ERRO\n");
-			system("pause");
+			return 1;
 		}
 
 		else {
@@ -166,18 +163,16 @@ void AL(celula **Lista, int linhas, char Nome[]) {
 				}
 			}
 
-			printf("OK\n");
-			system("pause");
+			return 0;
 		}
 	}
 
 	else {
-		printf("ERRO\n");
-		system("pause");
+		return 1;
 	}
 }
 
-void AC(celula **Lista, int colunas, char Nome[]) {
+void atribuirColuna(celula **Lista, int colunas, char Nome[]) {
 	float info;
 	int cont = 0, coluna, i;
 	celula *aux = (*Lista);
@@ -201,9 +196,7 @@ void AC(celula **Lista, int colunas, char Nome[]) {
 
 
 		if (aux->colunas < coluna) {
-
-			printf("ERRO\n");
-			system("pause");
+			retunr 1;
 		}
 
 		else {
@@ -220,19 +213,17 @@ void AC(celula **Lista, int colunas, char Nome[]) {
 				}
 			}
 
-			printf("OK\n");
-			system("pause");
+			return 0;
 		}
 	}
 
 	else {
 
-		printf("ERRO\n");
-		system("pause");
+		return 1;
 	}
 }
 
-int TM(char nome, char nomeResultado[])
+int transporMatriz(char nome, char nomeResultado[])
 {
     celula *aux = *lista;
     int i,j;
@@ -241,7 +232,7 @@ int TM(char nome, char nomeResultado[])
     //buscar matriz conforme o nome
     if(aux == NULL)
     {
-        return "ERRO";
+        return 1;
     }
     else
     {
@@ -269,11 +260,11 @@ int TM(char nome, char nomeResultado[])
                 {
                     for(j=0;j<aux->colunas;j++)
                     {
-                        printf("%i ",matrizResultante[i][j]);
+                        printf("%6.2f ",matrizResultante[i][j]);
                     }
                     printf("/n");
                 }
-                return;
+                return 0;
             }
             aux = aux->prox;
         }
@@ -300,18 +291,18 @@ int TM(char nome, char nomeResultado[])
         {
             for(j=0;j<aux->colunas;j++)
             {
-                printf("%i ",matrizResultante[i][j]);
+                printf("%6.2f ",matrizResultante[i][j]);
             }
             printf("/n");
         }
-        return;
+        return 0;
     }
     else
-    {  return "ERRO";}
+    {  return 1;}
 }
 
 
-int SM(char nome[],char nome1[],char nomeResultado[])
+int somarMatriz(char nome[],char nome1[],char nomeResultado[])
 {
     celula *aux = *lista;
     int i,j;
@@ -320,7 +311,7 @@ int SM(char nome[],char nome1[],char nomeResultado[])
     
     if(aux == NULL)
     {
-        return "ERRO";
+        return 1;
     }
     else
     {//procura a primeira matriz
@@ -351,7 +342,7 @@ int SM(char nome[],char nome1[],char nomeResultado[])
             }
             else
             {
-                return "ERRO";
+                return 1;
             }
         }
         
@@ -364,7 +355,7 @@ int SM(char nome[],char nome1[],char nomeResultado[])
             }
             else
             {
-                return "ERRO";
+                return 1;
             }
         }
         
@@ -391,31 +382,31 @@ int SM(char nome[],char nome1[],char nomeResultado[])
                 {
                     for(j=0;j<aux->colunas;j++)
                     {
-                        printf("%i ",matrizResultante[i][j]);
+                        printf("%6.2f ",matrizResultante[i][j]);
                     }
                     printf("/n");
                 }
-                return;
+                return 0;
             }
             else
             {
-                return "ERRO";
+                return 1;
             }
         }
     }
 }
 
 
-int DV(char nome[],char nome1[],char nomeResultado[])
+int dividirMatriz(char nome[],char nome1[],char nomeResultado[])
 {
     celula *aux = *lista;
     int i,j;
     float **matrizResultante = NULL;
     int achou1=0,achou2=0;
-    
+
     if(aux == NULL)
     {
-        return "ERRO";
+        return 1;
     }
     else
     {//procura a primeira matriz
@@ -426,7 +417,7 @@ int DV(char nome[],char nome1[],char nomeResultado[])
                 achou1 = 1;
                 break;
             }
-            
+
             aux = aux->prox;
         }
         //se nao achar a matriz antes da ultima posicao
@@ -438,7 +429,17 @@ int DV(char nome[],char nome1[],char nomeResultado[])
                 {
                     if(strcmp(*aux->nomeMatriz,nome1)==0)
                     {
-                        achou2==1;
+                      for(i=0; i< aux->linhas;i++)
+                      {
+                          for(j=0; j< aux->colunas;j++)
+                          { 
+                            if(aux->matriz[i][j]==0)
+                            {
+                              return 1;
+                            }
+                          }
+                      }
+                        achou2=1;
                         break;
                     }
                     *aux=*aux->prox;
@@ -446,30 +447,41 @@ int DV(char nome[],char nome1[],char nomeResultado[])
             }
             else
             {
-                return "ERRO";
+                return 1;
             }
         }
-        
+
         //verifica ultima posicao
         if(achou2 == 0)
         {
             if(strcmp(*aux->nomeMatriz,nome1)==0)
-            {
+            {     
+              //verifica se tem zero em algum elemento da matriz2
+              for(i=0; i< aux->linhas;i++)
+              {
+                  for(j=0; j< aux->colunas;j++)
+                  { 
+                    if(aux->matriz[i][j]==0)
+                    {
+                      return 1;
+                    }
+                  }
+              }
                 achou2 = 1;
             }
             else
             {
-                return "ERRO";
+                return 1;
             }
         }
-        
+
         //se encontrar as duas matrizes
         if(achou1 == 1 && achou2 == 1)
         { //verifica se as matrizes tem o mesmo tamanho
             if(aux->linhas == aux->linhas && aux->colunas == aux->colunas)
             {
                 *matrizResultante = malloc(aux->linhas * sizeof(float *));
-                
+
                 for(j=0;j< aux->linhas;i++)
                 {
                     matrizResultante[j] = malloc(aux->colunas * sizeof(float));
@@ -486,20 +498,21 @@ int DV(char nome[],char nome1[],char nomeResultado[])
                 {
                     for(j=0; j<  aux->colunas; j++)
                     {
-                        printf("%i ",matrizResultante[i][j]);
+                        printf("%6.2f ",matrizResultante[i][j]);
                     }
                     printf("/n");
                 }
-                return;
+                return 0;
             }
             else
             {
-                return "ERRO";
+                return 1;
             }
-            
+
         }
     }
 }
+
 
 // int MM(char nome1[], char nome2[], char nomeResultado[]){
 //     celula *matriz1 = NULL, *matriz2 = NULL;
@@ -555,7 +568,7 @@ int DV(char nome[],char nome1[],char nomeResultado[])
 //     printf("Not done yet\n");
 // }
 
-int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
+int multiplicarMatriz(celula **lista,char nome[],char nome1[],char nomeResultado)
 {
   celula *aux = *lista;
   int i,j,k, soma = 0;
@@ -563,7 +576,7 @@ int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
   int achou1 = 0, achou2 = 0;
 
   if(aux==NULL) {
-    return "ERRO";
+    return 1;
   }
   else {
     //procura primeira matrizes
@@ -588,7 +601,7 @@ int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
       }
     }
     else {
-      return "ERRO";
+      return 1;
     }
 
     //verifica ultima posicao caso de matriz 2 na ultima posicao da lista
@@ -597,7 +610,7 @@ int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
         achou2 = 1;
       }
       else {
-        return "ERRO";
+        return 1;
       }
     }
 
@@ -626,7 +639,7 @@ int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
         {
           for(j=0;j<aux->colunas;j++)
           {
-            printf("%i",matrizResultante[i][j]);
+            printf("%6.2f",matrizResultante[i][j]);
           }
             printf("\n");
         }
@@ -634,13 +647,13 @@ int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
       }
       else
       {
-        return "ERRO";
+        return 1;
       }
     }
   }
 } 
 
-int ME(char nome1[],char nome2[],char nomeResultado[])
+int multiplicarElementos(char nome1[],char nome2[],char nomeResultado[])
 {
     celula *aux = *lista;
     int i,j;
@@ -649,7 +662,7 @@ int ME(char nome1[],char nome2[],char nomeResultado[])
     
     if(aux == NULL)
     {
-        return "ERRO";
+        return 1;
     }
     else
     {//procura a primeira matriz
@@ -680,7 +693,7 @@ int ME(char nome1[],char nome2[],char nomeResultado[])
             }
             else
             {
-                return "ERRO";
+                return 1;
             }
         }
         
@@ -693,7 +706,7 @@ int ME(char nome1[],char nome2[],char nomeResultado[])
             }
             else
             {
-                return "ERRO";
+                return 1;
             }
         }
         
@@ -720,15 +733,15 @@ int ME(char nome1[],char nome2[],char nomeResultado[])
                 {
                     for(j=0;j<aux->colunas;j++)
                     {
-                        printf("%i ",matrizResultante[i][j]);
+                        printf("%6.2f ",matrizResultante[i][j]);
                     }
                     printf("/n");
                 }
-                return;
+                return 0;
             }
             else
             {
-                return "ERRO";
+                return 1;
             }
             
         }
