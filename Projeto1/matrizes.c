@@ -390,9 +390,107 @@ int DV(celula **lista,char nome[],char nome1[],char nomeResultado)
     }
 }
 
-void MM(void){
-    printf("Not done yet\n");
+int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
+{
+  celula *aux = *lista;
+  int i,j,k, soma = 0;
+  float **matrizResultante = NULL;
+  int achou1 = 0, achou2 = 0;
+
+  if(aux==NULL)
+  {
+    return "ERRO";
+  }
+  else
+  {
+    //procura primeira matrizes
+    while(aux->prox != NULL)
+    {
+      if(strcmp(aux->nomeMatriz,nome)==0)
+      {
+        achou1 = 1;
+        break;
+      }
+      aux = aux->prox;
+    }
+
+    if(achou1 == 0)
+    {//confere ultima posicao da lista se contem matriz1
+      if(strcmp(aux->nomeMatriz, nome)==0)
+      {//procura matriz 2
+        while(aux->prox != NULL)
+        {
+          if(strcmp(*aux->nomeMatriz,nome1)==0)
+          {
+            achou2==1;
+            break;
+          }
+          *aux=*aux->prox;
+        }
+      }
+    }
+    else
+    {
+      return "ERRO";
+    }
+
+    //verifica ultima posicao caso de matriz 2 na ultima posicao da lista
+    if(achou2 == 0)
+    {
+      if(strcmp(*aux->nomeMatriz,nome1)==0)
+      {
+        achou2 = 1;
+      }
+      else
+      {
+        return "ERRO";
+      }
+    }
+
+    //caso as duas matrizes existirem
+    if(achou1 == 1 && achou2 == 1)
+    { //verifica se Coluna de matriz 1 == Linha de matriz 2
+      if(aux->colunas == aux->linhas)
+      {
+        // i < linhas matriz1
+        for(i=0;i<aux->linhas;i++)
+        {
+          // j < colunas matriz2
+          for(j=0;j<aux->colunas;j++)
+          {
+            // k < linhas matriz2
+            for(k=0;k<aux->linhas)
+            { //              matriz1 x matriz2
+              soma = soma + (aux->matriz[i][k] * aux->matriz[k][j]);
+            }
+            //armazena soma na matriz matrizResultante
+            matrizResultante[i][j] = soma;
+
+            //zera soma novamente para cacular o proximo elemento
+            soma = 0;
+          }
+        }
+
+        //exibe matrizResultante
+        // i < linha matriz1
+        for(i=0;i<aux->linhas;i++)
+        {
+          for(j=0;j<aux->colunas;j++)
+          {
+            printf("%i",matrizResultante[i][j]);
+          }
+            printf("\n");
+        }
+
+      }
+      else
+      {
+        return "ERRO";
+      }
+    }
+  }
 }
+
 
 int ME(celula **lista,char nome[],char nome1[],char nomeResultado)
 {
