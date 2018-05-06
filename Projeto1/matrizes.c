@@ -9,9 +9,9 @@ struct No {
     struct No *prox;
 };
 
-typedef struct No celula;
+celula **lista = NULL;
 
-int CM(celula **lista, int linhas, int colunas, char nome[]) {
+int CM(int linhas, int colunas, char nome[]) {
     celula *aux = (*lista);
     celula *aux2 = (*lista);
     celula *novo = (celula*)malloc(sizeof(celula));
@@ -47,7 +47,7 @@ int CM(celula **lista, int linhas, int colunas, char nome[]) {
     return 1;
 }
 
-int DM(celula **lista, char nome[]) {
+int DM(char nome[]) {
     celula *aux = *lista;
     celula *temp = *lista;
     //condicao para primeiro elemento da lista
@@ -77,7 +77,7 @@ int DM(celula **lista, char nome[]) {
     return 0;
 }
 
-int IM(celula **lista, char nome[]) {
+int IM(char nome[]) {
     celula *aux = *lista;
     int c1, c2;
     
@@ -109,19 +109,130 @@ int IM(celula **lista, char nome[]) {
     return 0;
 }
 
-void AE(void) {
-    printf("Not done yet\n");
+int AE(char nome[], int linha, int coluna, float n) {
+    int val = 0;    //validacao
+    //Procura pelo vetor
+    celula *aux = *lista;
+    while (aux->prox != NULL) {
+        if (strcmp(nome, aux->nomeMatriz) == 0) {
+            val = 1;
+            break;
+        }
+    }
+    if(val == 0 || linha >= aux->linhas || linha < 0 || coluna >= aux->colunas || coluna < 0) {
+        printf("ERRO\n"); 
+        return 0;
+    }
+    aux->matriz[linha-1][coluna-1] = n;
+    printf("OK");
+    return 1;
+
 }
 
-void AL(void) {
-    printf("Not done yet\n");
+void AL(celula **Lista, int linhas, char Nome[]) {
+
+	float info;
+	int cont = 0, linha, i;
+	celula *aux = (*Lista);
+	celula *novo = (celula*)malloc(sizeof(celula));
+
+
+
+	while (aux != NULL) {
+
+		if (strcmp(Nome, aux->nomeMatriz) == 0) {
+			cont++;
+			break;
+		}
+		aux = aux->prox;
+	}
+
+	if (cont == 1) {
+		printf("Em qual linha deseja inserir?\n");
+		scanf("%d", &linha);
+		if (aux->linhas < linha) {
+			printf("ERRO\n");
+			system("pause");
+		}
+
+		else {
+			printf("Quais Elementos?\n");
+			for (i = 0; i < aux->colunas; i++) {
+				if ((scanf("%f", &info) == 1)) {
+					aux->matriz[linha-1][i] = info;
+				}
+				else {
+					break;
+				}
+			}
+
+			printf("OK\n");
+			system("pause");
+		}
+	}
+
+	else {
+		printf("ERRO\n");
+		system("pause");
+	}
 }
 
-void AC(void) {
-    printf("Not done yet\n");
+void AC(celula **Lista, int colunas, char Nome[]) {
+	float info;
+	int cont = 0, coluna, i;
+	celula *aux = (*Lista);
+	celula *novo = (celula*)malloc(sizeof(celula));
+
+	while (aux != NULL) {
+
+		if (strcmp(Nome, aux->nomeMatriz) == 0) {
+			cont++;
+			break;
+
+		}
+		aux = aux->prox;
+	}
+
+	if (cont == 1) {
+
+		printf("Em qual coluna deseja inserir?\n");
+
+		scanf("%d", &coluna);
+
+
+		if (aux->colunas < coluna) {
+
+			printf("ERRO\n");
+			system("pause");
+		}
+
+		else {
+
+			printf("Quais Elementos?\n");
+
+			for (i = 0; i < aux->colunas; i++) {
+
+				if ((scanf("%f", &info) == 1)) {
+					aux->matriz[i][coluna-1] = info;
+				}
+				else {
+					break;
+				}
+			}
+
+			printf("OK\n");
+			system("pause");
+		}
+	}
+
+	else {
+
+		printf("ERRO\n");
+		system("pause");
+	}
 }
 
-int TM(celula **lista,char nome, char nomeResultado)
+int TM(char nome, char nomeResultado[])
 {
     celula *aux = *lista;
     int i,j;
@@ -160,7 +271,7 @@ int TM(celula **lista,char nome, char nomeResultado)
                     {
                         printf("%i ",matrizResultante[i][j]);
                     }
-                    printf("\n");
+                    printf("/n");
                 }
                 return;
             }
@@ -191,7 +302,7 @@ int TM(celula **lista,char nome, char nomeResultado)
             {
                 printf("%i ",matrizResultante[i][j]);
             }
-            printf("\n");
+            printf("/n");
         }
         return;
     }
@@ -200,7 +311,7 @@ int TM(celula **lista,char nome, char nomeResultado)
 }
 
 
-int SM(celula **lista,char nome[],char nome1[],char nomeResultado)
+int SM(char nome[],char nome1[],char nomeResultado[])
 {
     celula *aux = *lista;
     int i,j;
@@ -282,7 +393,7 @@ int SM(celula **lista,char nome[],char nome1[],char nomeResultado)
                     {
                         printf("%i ",matrizResultante[i][j]);
                     }
-                    printf("\n");
+                    printf("/n");
                 }
                 return;
             }
@@ -295,7 +406,7 @@ int SM(celula **lista,char nome[],char nome1[],char nomeResultado)
 }
 
 
-int DV(celula **lista,char nome[],char nome1[],char nomeResultado)
+int DV(char nome[],char nome1[],char nomeResultado[])
 {
     celula *aux = *lista;
     int i,j;
@@ -377,7 +488,7 @@ int DV(celula **lista,char nome[],char nome1[],char nomeResultado)
                     {
                         printf("%i ",matrizResultante[i][j]);
                     }
-                    printf("\n");
+                    printf("/n");
                 }
                 return;
             }
@@ -390,6 +501,60 @@ int DV(celula **lista,char nome[],char nome1[],char nomeResultado)
     }
 }
 
+// int MM(char nome1[], char nome2[], char nomeResultado[]){
+//     celula *matriz1 = NULL, *matriz2 = NULL;
+//     celula *aux = *lista;
+//     celula *novo = (celula*)malloc(sizeof(celula));
+//     float **matrizResultante = NULL;
+//     int busca = 0, contador = 0, contador2 = 0, contador3 = 0;
+    
+//     //validacao das matrizes
+//     if(aux == NULL) return 0;
+//     while (aux != NULL) {
+//         if(strcmp(aux->nomeMatriz, nome1) == 0) {
+//             matriz1 = aux;
+//             busca++;
+//         }
+//         if(strcmp(aux->nomeMatriz, nome2) == 0) {
+//             matriz2 = aux;
+//             busca++;
+//         }
+//         if(strcmp(aux->nomeMatriz, nomeResultado) == 0) return 0;
+//         aux = aux->prox;
+//     }
+//     if(busca != 2) return 0;
+//     if(matriz1->colunas != matriz2->linhas) return 0;
+
+//     //cria a nova matriz
+//     strcpy(novo->nomeMatriz, nomeResultado);
+//     novo->linhas = matriz1->linhas;
+//     novo->colunas = matriz2->colunas;
+//     novo->matriz = (float**)malloc(novo->linhas * sizeof(sizeof(float*)));
+//     for (contador = 0; contador < novo->colunas; contador++) {
+//         novo->matriz[contador] = (float*)malloc(novo->colunas * sizeof(float));
+//     }
+//     novo->prox = NULL;
+
+//     //multiplicacao da matriz
+//     for(contador = 0; contador < novo->linhas; contador++) {
+//         for (contador2 = 0; contador2 < novo->linhas; contador2++) {
+//             for (contador3 = 0; contador3 < novo->colunas; contador3++)
+//             novo->matriz[contador][contador2] += (matriz1->matriz[contador][contador3] * matriz2->matriz[contador3][contador2]);
+//         }
+//     }
+
+//     //imprime a matriz
+//     for (contador = 0; contador < novo->linhas; contador++) {
+//         for (contador2 = 0; contador2 < novo->colunas; contador2++) {
+//             printf("%6.2f ", novo->matriz[contador][contador2]);
+//         }
+//         printf("\n");
+//     }
+
+//     return 1;
+//     printf("Not done yet\n");
+// }
+
 int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
 {
   celula *aux = *lista;
@@ -397,31 +562,24 @@ int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
   float **matrizResultante = NULL;
   int achou1 = 0, achou2 = 0;
 
-  if(aux==NULL)
-  {
+  if(aux==NULL) {
     return "ERRO";
   }
-  else
-  {
+  else {
     //procura primeira matrizes
-    while(aux->prox != NULL)
-    {
-      if(strcmp(aux->nomeMatriz,nome)==0)
-      {
+    while(aux->prox != NULL) {
+      if(strcmp(aux->nomeMatriz,nome)==0) {
         achou1 = 1;
         break;
       }
       aux = aux->prox;
     }
 
-    if(achou1 == 0)
-    {//confere ultima posicao da lista se contem matriz1
-      if(strcmp(aux->nomeMatriz, nome)==0)
-      {//procura matriz 2
+    if(achou1 == 0) {//confere ultima posicao da lista se contem matriz1
+      if(strcmp(aux->nomeMatriz, nome)==0) {//procura matriz 2
         while(aux->prox != NULL)
         {
-          if(strcmp(*aux->nomeMatriz,nome1)==0)
-          {
+          if(strcmp(*aux->nomeMatriz,nome1)==0) {
             achou2==1;
             break;
           }
@@ -429,38 +587,29 @@ int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
         }
       }
     }
-    else
-    {
+    else {
       return "ERRO";
     }
 
     //verifica ultima posicao caso de matriz 2 na ultima posicao da lista
-    if(achou2 == 0)
-    {
-      if(strcmp(*aux->nomeMatriz,nome1)==0)
-      {
+    if(achou2 == 0) {
+      if(strcmp(*aux->nomeMatriz,nome1)==0) {
         achou2 = 1;
       }
-      else
-      {
+      else {
         return "ERRO";
       }
     }
 
     //caso as duas matrizes existirem
-    if(achou1 == 1 && achou2 == 1)
-    { //verifica se Coluna de matriz 1 == Linha de matriz 2
-      if(aux->colunas == aux->linhas)
-      {
+    if(achou1 == 1 && achou2 == 1) { //verifica se Coluna de matriz 1 == Linha de matriz 2
+      if(aux->colunas == aux->linhas) {
         // i < linhas matriz1
-        for(i=0;i<aux->linhas;i++)
-        {
+        for(i=0;i<aux->linhas;i++) {
           // j < colunas matriz2
-          for(j=0;j<aux->colunas;j++)
-          {
+          for(j=0;j<aux->colunas;j++) {
             // k < linhas matriz2
-            for(k=0;k<aux->linhas)
-            { //              matriz1 x matriz2
+            for(k=0;k<aux->linhas; k++) { //matriz1 x matriz2
               soma = soma + (aux->matriz[i][k] * aux->matriz[k][j]);
             }
             //armazena soma na matriz matrizResultante
@@ -489,10 +638,9 @@ int MM(celula **lista,char nome[],char nome1[],char nomeResultado)
       }
     }
   }
-}
+} 
 
-
-int ME(celula **lista,char nome[],char nome1[],char nomeResultado)
+int ME(char nome1[],char nome2[],char nomeResultado[])
 {
     celula *aux = *lista;
     int i,j;
@@ -507,7 +655,7 @@ int ME(celula **lista,char nome[],char nome1[],char nomeResultado)
     {//procura a primeira matriz
         while(aux->prox !=NULL)
         {
-            if(strcmp(aux->nomeMatriz, nome)==0)
+            if(strcmp(aux->nomeMatriz, nome1)==0)
             {
                 achou1 = 1;
                 break;
@@ -518,11 +666,11 @@ int ME(celula **lista,char nome[],char nome1[],char nomeResultado)
         //se nao achar a matriz antes da ultima posicao
         if(achou1 == 0)
         {
-            if(strcmp(aux->nomeMatriz, nome)==0)
+            if(strcmp(aux->nomeMatriz, nome1)==0)
             {
                 while(aux->prox != NULL)
                 {
-                    if(strcmp(*aux->nomeMatriz,nome1)==0)
+                    if(strcmp(*aux->nomeMatriz,nome2)==0)
                     {
                         achou2==1;
                         break;
@@ -539,7 +687,7 @@ int ME(celula **lista,char nome[],char nome1[],char nomeResultado)
         //verifica ultima posicao
         if(achou2 == 0)
         {
-            if(strcmp(*aux->nomeMatriz,nome1)==0)
+            if(strcmp(*aux->nomeMatriz,nome2)==0)
             {
                 achou2 = 1;
             }
@@ -574,7 +722,7 @@ int ME(celula **lista,char nome[],char nome1[],char nomeResultado)
                     {
                         printf("%i ",matrizResultante[i][j]);
                     }
-                    printf("\n");
+                    printf("/n");
                 }
                 return;
             }
