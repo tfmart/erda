@@ -127,14 +127,12 @@ int atribuirElemento(char nome[], int linha, int coluna, float n) {
 
 }
 
-void atribuirLinha(celula **Lista, int linhas, char Nome[]) {
+int atribuirLinha(celula **Lista, int linhas, char Nome[]) {
 
 	float info;
 	int cont = 0, linha, i;
 	celula *aux = (*Lista);
 	celula *novo = (celula*)malloc(sizeof(celula));
-
-
 
 	while (aux != NULL) {
 
@@ -172,7 +170,7 @@ void atribuirLinha(celula **Lista, int linhas, char Nome[]) {
 	}
 }
 
-void atribuirColuna(celula **Lista, int colunas, char Nome[]) {
+int atribuirColuna(celula **Lista, int colunas, char Nome[]) {
 	float info;
 	int cont = 0, coluna, i;
 	celula *aux = (*Lista);
@@ -394,6 +392,7 @@ int somarMatriz(char nome[],char nome1[],char nomeResultado[])
             }
         }
     }
+    return 0;
 }
 
 
