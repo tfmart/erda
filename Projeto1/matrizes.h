@@ -25,12 +25,12 @@ int atribuirElemento(char nome[], int linha, int coluna, float n);
 //ENTRADA: AE <nome> <linha> <coluna> <valor>
 //SAIDA: OK ou ERRO (caso o vetor nao exista ou a posicao seja invalida)
 
-void atribuirLinha(celula **Lista, int linhas, char Nome[]);
+int atribuirLinha(celula **Lista, int linhas, char Nome[]);
 //Atribui uma linha de elementos a uma coluna de um vetor
 //ENTRADA: AL <nome> <linha> <val1> ... <valn>
 //SAIDA: OK ou ERRO (caso o vetor nao exista, a coluna seja invalida ou a qtde de elementos nao seja condizente com as dimensoes do vetor)
 
-void atribuirColuna(celula **Lista, int colunas, char Nome[]);
+int atribuirColuna(celula **Lista, int colunas, char Nome[]);
 //Atribui uma coluna de elementos a um vetor
 
 int transporMatriz(char nome, char nomeResultado[]);
