@@ -25,15 +25,15 @@ int atribuirElemento(char nome[], int linha, int coluna, float n);
 //ENTRADA: AE <nome> <linha> <coluna> <valor>
 //SAIDA: OK ou ERRO (caso o vetor nao exista ou a posicao seja invalida)
 
-int atribuirLinha(celula **Lista, int linhas, char Nome[]);
+int atribuirLinha(char Nome[], int linha);
 //Atribui uma linha de elementos a uma coluna de um vetor
 //ENTRADA: AL <nome> <linha> <val1> ... <valn>
 //SAIDA: OK ou ERRO (caso o vetor nao exista, a coluna seja invalida ou a qtde de elementos nao seja condizente com as dimensoes do vetor)
 
-int atribuirColuna(celula **Lista, int colunas, char Nome[]);
+int atribuirColuna(char Nome[], int coluna);
 //Atribui uma coluna de elementos a um vetor
 
-int transporMatriz(char nome, char nomeResultado[]);
+int transporMatriz(char nome[], char nomeResultado[]);
 //Transpoe uma matriz
 //ENTRADA: TM <nome> <nome-resultado sem espacos>
 //SAIDA: Imprime a matriz resultante ou ERRO (caso alguma das matrizes nao exista, suas dimensoes nao sejam as mesmas ou a matriz resultante ja existe)
@@ -48,11 +48,11 @@ int dividirMatriz(char nome[],char nome1[],char nomeResultado[]);
 //ENTRADA: DV <nome1> <nome2> <nome-resultado sem espacos>
 //SAIDA: OK ou ERRO (caso o vetor nao exista ou a posicao seja invalida)
 
-int multiplicarMatriz(celula **lista,char nome[],char nome1[],char nomeResultado);
+int multiplicarMatriz(char nome[],char nome1[],char nomeResultado[]);
 
 int multiplicarElementos(char nome1[],char nome2[],char nomeResultado[]);
 
-void FE(void) 
 //finaliza o programa
 
 #endif
+
