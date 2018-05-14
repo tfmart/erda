@@ -10,10 +10,14 @@ struct No {
     struct No *prox;
 };
 
-celula **lista = NULL;
+typedef struct No celula;
+struct No **lista = NULL;
 
 int criarMatriz(int linhas, int colunas, char nome[]) {
-    celula *aux = (*lista);                                                     //auxilia na insercao da matriz da lista
+    celula *aux;                                                                //auxilia na insercao da matriz da lista
+    //printf("Oi\n");                                                           //debug
+    //PROBLEMA NA IGUALDADE
+    aux = (*lista);
     celula *validaNome = (*lista);                                              //ajuda a verificar se o nome lido ja foi usado
     celula *novo = (celula*)malloc(sizeof(celula));                             //no para armazenar a matriz a ser criada
     int contador;
