@@ -15,7 +15,7 @@ struct No *lista = NULL;
 
 int criarMatriz(int linhas, int colunas, char nome[]) {
     celula *aux;                                                                //auxilia na insercao da matriz da lista
-    //printf("Oi\n");                                                           //debug
+    
     aux = (lista);
     celula *validaNome = (lista);                                              //ajuda a verificar se o nome lido ja foi usado
     celula *novo = (celula*)malloc(sizeof(celula));                             //no para armazenar a matriz a ser criada
