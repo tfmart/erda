@@ -13,39 +13,41 @@ struct No {
 celula **lista = NULL;
 
 int criarMatriz(int linhas, int colunas, char nome[]) {
-    celula *aux = (*lista);
-    celula *aux2 = (*lista);
-    celula *novo = (celula*)malloc(sizeof(celula));
+    celula *aux = (*lista);                                                     //auxilia na insercao da matriz da lista
+    celula *validaNome = (*lista);                                              //ajuda a verificar se o nome lido ja foi usado
+    celula *novo = (celula*)malloc(sizeof(celula));                             //no para armazenar a matriz a ser criada
     int contador;
     
     //valida a criação da matriz
-    if((linhas < 1 || linhas > 50) || (colunas < 1 || colunas > 50)) return 0;
-    if (aux2 != NULL) {
-        if (strcmp(aux2->nomeMatriz, nome) == 0) return 0;
+    if((linhas < 1 || linhas > 50) || (colunas < 1 || colunas > 50)) return 0;  //verifica se as dimensoes sao validas
+    if (validaNome != NULL) {                                                   //verifica se a matriz ja existe
+        if (strcmp(validaNome->nomeMatriz, nome) == 0) return 0;
         while (aux->prox != NULL) {
-            if (strcmp(aux2->nomeMatriz, nome) == 0) return 0;
-            aux2 = aux2->prox;
+            if (strcmp(validaNome->nomeMatriz, nome) == 0) return 0;
+            validaNome = validaNome->prox;
         }
     }
     
+    //armazena os dados novos
     strcpy(novo->nomeMatriz, nome);
     novo->linhas = linhas;
     novo->colunas = colunas;
-    novo->matriz = (float**)malloc(linhas * sizeof(sizeof(float*)));
-    for (contador = 0; contador < colunas; contador++) {
+    novo->matriz = (float**)malloc(linhas * sizeof(sizeof(float*)));        //atribui as linhas para a matriz
+    for (contador = 0; contador < colunas; contador++) {                    //atribui as colunas para a matriz
         novo->matriz[contador] = (float*)malloc(colunas * sizeof(float));
     }
     novo->prox = NULL;
     
     if (aux == NULL) {
-        *lista = novo;
+        *lista = novo;                              //cria uma nova lista caso a lista esteja vazia
     } else {
         while (aux->prox != NULL) {
             aux = aux->prox;
         }
-        aux->prox = novo;
+        aux->prox = novo;                           //caso contrário, insere a nova matriz na lista de matrizes
     }
     return 1;
+    //retorna 0 para ERRO, 1 para OK
 }
 
 int destruirMatriz(char nome[]) {
@@ -76,17 +78,18 @@ int destruirMatriz(char nome[]) {
         return 1;
     }
     return 0;
+    //retorna 0 para ERRO, 1 para OK
 }
 
 int imprimirMatriz(char nome[]) {
     celula *aux = *lista;
     int c1, c2;
     
-    if(aux == NULL) return 0;
+    if(aux == NULL) return 0;                                   //caso a lista esteja vazia
     else {
         while (aux->prox != NULL) {
             if (strcmp(aux->nomeMatriz, nome) == 0) {
-                for (c1 = 0; c1 < aux->linhas; c1++) {
+                for (c1 = 0; c1 < aux->linhas; c1++) {          //imprime a matriz
                     for (c2 = 0; c2 < aux->colunas; c2++) {
                         printf("%6.2f ", aux->matriz[c1][c2]);
                     }
@@ -107,11 +110,13 @@ int imprimirMatriz(char nome[]) {
             return 1;
         }
     }
-    return 0;
+    return 0;                                                   //caso a matriz lida nao exista
+    //retorna 0 para caso matriz lida não exista, 1 para OK
 }
 
 int atribuirElemento(char nome[], int linha, int coluna, float n) {
     int val = 0;    //validacao
+    
     //Procura pelo vetor
     celula *aux = *lista;
     while (aux->prox != NULL) {
