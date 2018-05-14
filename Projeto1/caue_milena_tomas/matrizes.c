@@ -11,14 +11,13 @@ struct No {
 };
 
 typedef struct No celula;
-struct No **lista = NULL;
+struct No *lista = NULL;
 
 int criarMatriz(int linhas, int colunas, char nome[]) {
     celula *aux;                                                                //auxilia na insercao da matriz da lista
     //printf("Oi\n");                                                           //debug
-    //PROBLEMA NA IGUALDADE
-    aux = (*lista);
-    celula *validaNome = (*lista);                                              //ajuda a verificar se o nome lido ja foi usado
+    aux = (lista);
+    celula *validaNome = (lista);                                              //ajuda a verificar se o nome lido ja foi usado
     celula *novo = (celula*)malloc(sizeof(celula));                             //no para armazenar a matriz a ser criada
     int contador;
     
@@ -43,7 +42,7 @@ int criarMatriz(int linhas, int colunas, char nome[]) {
     novo->prox = NULL;
     
     if (aux == NULL) {
-        *lista = novo;                              //cria uma nova lista caso a lista esteja vazia
+        lista = novo;                              //cria uma nova lista caso a lista esteja vazia
     } else {
         while (aux->prox != NULL) {
             aux = aux->prox;
@@ -55,14 +54,14 @@ int criarMatriz(int linhas, int colunas, char nome[]) {
 }
 
 int destruirMatriz(char nome[]) {
-    celula *aux = *lista;
-    celula *temp = *lista;
+    celula *aux = lista;
+    celula *temp = lista;
     //condicao para primeiro elemento da lista
     if (aux == NULL) return 0;
     if (strcmp(aux->nomeMatriz, nome) == 0) {
         temp = temp->prox;
         free(aux);
-        *lista = temp;
+        lista = temp;
         return 1;
     } else {                                            //outros elementos da lista
         while (aux->prox != NULL) {
@@ -86,7 +85,7 @@ int destruirMatriz(char nome[]) {
 }
 
 int imprimirMatriz(char nome[]) {
-    celula *aux = *lista;
+    celula *aux = lista;
     int c1, c2;
     
     if(aux == NULL) return 0;                                   //caso a lista esteja vazia
@@ -122,7 +121,7 @@ int atribuirElemento(char nome[], int linha, int coluna, float n) {
     int val = 0;    //validacao
     
     //Procura pelo vetor
-    celula *aux = *lista;
+    celula *aux = lista;
     while (aux->prox != NULL) {
         if (strcmp(nome, aux->nomeMatriz) == 0) {
             val = 1;
@@ -141,7 +140,7 @@ int atribuirLinha(char Nome[], int linha) {
     
     float info;
     int cont = 0, i;
-    celula *aux = (*lista);
+    celula *aux = (lista);
     celula *novo = (celula*)malloc(sizeof(celula));
     
     while (aux != NULL) {
@@ -181,7 +180,7 @@ int atribuirLinha(char Nome[], int linha) {
 int atribuirColuna(char Nome[], int coluna) {
     float info;
     int cont = 0, i;
-    celula *aux = (*lista);
+    celula *aux = (lista);
     celula *novo = (celula*)malloc(sizeof(celula));
     
     while (aux != NULL) {
@@ -225,7 +224,7 @@ int atribuirColuna(char Nome[], int coluna) {
 
 int transporMatriz(char nome[], char nomeResultado[])
 {
-    celula *aux = *lista;
+    celula *aux = lista;
     int i,j;
     float **matrizResultante = NULL;
     
@@ -304,7 +303,7 @@ int transporMatriz(char nome[], char nomeResultado[])
 
 int somarMatriz(char nome[],char nome1[],char nomeResultado[])
 {
-    celula *aux = *lista;
+    celula *aux = lista;
     int i,j;
     float **matrizResultante = NULL;
     int achou1=0,achou2=0;
@@ -400,7 +399,7 @@ int somarMatriz(char nome[],char nome1[],char nomeResultado[])
 
 int dividirMatriz(char nome[],char nome1[],char nomeResultado[])
 {
-    celula *aux = *lista;
+    celula *aux = lista;
     int i,j;
     float **matrizResultante = NULL;
     int achou1=0,achou2=0;
@@ -517,7 +516,7 @@ int dividirMatriz(char nome[],char nome1[],char nomeResultado[])
 
 int multiplicarMatriz(char nome[],char nome1[],char nomeResultado[])
 {
-    celula *aux = *lista;
+    celula *aux = lista;
     int i,j,k, soma = 0;
     float **matrizResultante = NULL;
     int achou1 = 0, achou2 = 0;
@@ -603,7 +602,7 @@ int multiplicarMatriz(char nome[],char nome1[],char nomeResultado[])
 
 int multiplicarElementos(char nome1[],char nome2[],char nomeResultado[])
 {
-    celula *aux = *lista;
+    celula *aux = lista;
     int i,j;
     float **matrizResultante = NULL;
     int achou1=0,achou2=0;
