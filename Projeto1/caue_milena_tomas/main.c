@@ -52,14 +52,14 @@ int main()
                 scanf("%s",nome);                                               //le o nome da matriz a ser atribuida o elemento
                 scanf("%i %i", &linhas, &colunas);                              //le as coordenadas em que o elemneto sera atribuido na matriz
                 scanf("%i",&valor);
-                if(atribuirElemento(nome,linhas,colunas,valor)==1)printf("OK\n");
+                if(atribuirElemento(nome,linhas,colunas,valor)==0)printf("OK\n");
                 else printf("ERRO\n");
                 break;
                 
             case 5://AL (Atribuir Linha) <nome> <linha> <val1>  ...  <valn> #
                 scanf("%s", nome);                                              //le o nome da matriz a ser atribuida a linha
                 scanf("%i", &linhas);                                           //a linha em que os elementos serão atribuidos
-                if(atribuirLinha(nome,linhas)==1)printf("OK\n");                //a leitura dos elementos ocorre dentro da funcao
+                if(atribuirLinha(nome,linhas)==0)printf("OK\n");                //a leitura dos elementos ocorre dentro da funcao
                 else printf("ERRO\n");
                 break;
                 
