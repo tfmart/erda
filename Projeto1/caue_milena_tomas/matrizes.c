@@ -28,7 +28,9 @@ int criarMatriz(int linhas, int colunas, char nome[]) {
         while (aux->prox != NULL) {
             if (strcmp(validaNome->nomeMatriz, nome) == 0) return 0;
             validaNome = validaNome->prox;
+            aux=aux->prox;
         }
+       
     }
     
     //armazena os dados novos
