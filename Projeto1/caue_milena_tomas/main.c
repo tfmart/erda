@@ -66,7 +66,7 @@ int main()
             case 6://AC (Atribuir Coluna) <nome> <coluna> <val1>  ...  <valm> #
                 scanf("%s", nome);                                              //le o nome da matriz a ser atribuida a coluna
                 scanf("%i", &colunas);                                          //le a coluna em que os elementos serao atribuidos na matriz
-                if (atribuirColuna(nome,colunas)==0) printf("ERRO\n");          //a leitura dos elementos ocorre dentro da funcao
+                if (atribuirColuna(nome,colunas)==1) printf("ERRO\n");          //a leitura dos elementos ocorre dentro da funcao
                 else printf("OK\n");
                 break;
                 
