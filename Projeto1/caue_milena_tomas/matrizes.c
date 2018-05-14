@@ -37,7 +37,7 @@ int criarMatriz(int linhas, int colunas, char nome[]) {
     novo->colunas = colunas;
     novo->matriz = (float**)malloc(linhas * sizeof(sizeof(float*)));        //atribui as linhas para a matriz
     for (contador = 0; contador < colunas; contador++) {                    //atribui as colunas para a matriz
-        novo->matriz[contador] = (float*)malloc(colunas * sizeof(float));
+        novo->matriz[contador] = (float*)calloc(colunas , sizeof(float));
     }
     novo->prox = NULL;
     
