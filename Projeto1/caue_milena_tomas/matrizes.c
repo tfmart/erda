@@ -122,11 +122,12 @@ int atribuirElemento(char nome[], int linha, int coluna, float n) {
     
     //Procura pelo vetor
     celula *aux = lista;
-    while (aux->prox != NULL) {
+    while (aux!= NULL) {
         if (strcmp(nome, aux->nomeMatriz) == 0) {
             val = 1;
             break;
         }
+        aux= aux->prox;
     }
     if(val == 0 || linha >= aux->linhas || linha < 0 || coluna >= aux->colunas || coluna < 0) {
         return 0;
