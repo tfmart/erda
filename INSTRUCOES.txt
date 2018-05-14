@@ -1,0 +1,15 @@
+OBS: o programa poderá ser executado SOMENTE em Linux/UNIX! Todos os arquivos necessários para executar o programa estão disponíveis no nosso Github (https://github.com/tfmart/erda/tree/master/Projeto1) na pasta caue_milena_tomas
+
+1. Crie uma pasta e salve todos os seguintes arquivos nela:
+	- lista.c e lista.h
+	- matrizes.c e matrizes.h
+	- main.c
+	- Makefile
+
+2. Abra o Terminal e abra o diretório aonde está armazenado os arquivos
+
+3. Ao abrir o diretório, digite make
+
+4. Caso nenhum erro será gerado, o executável prog deverá ser criado. Para executá-lo, digite ./prog no Terminal
+
+PROBLEMA: ao tentar executar qualquer uma das funções em matrizes.h, o programa retorna um erro de memória (Segmentation Fault: 11), provavelmente devido ao acesso indevido de memória. Por favor, rodem o programa junto com o Edmar para que ele possa nos ajudar a achar o erro no nosso projeto. Eu já corrigi todos os erros de sintaxe, então vocês não devem encontrar nenhum problema ao executar os códigos. 
