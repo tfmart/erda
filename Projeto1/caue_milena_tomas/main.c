@@ -87,7 +87,7 @@ int main()
                 scanf("%s",nome);                                               //le o nome da primeira matriz
                 scanf("%s",nome1);                                              //le o nome da segunda matriz
                 scanf("%s",nomeR);                                              //nome que sera dadao a matriz que ira armazenar o resultado da divisao
-                if(dividirMatriz(nome,nome1,nomeR)==0) printf("ERRO\n");
+                if(dividirMatriz(nome,nome1,nomeR)==1) printf("ERRO\n");
                 break;
                 
             case 10://MM (Multiplicacao de matriz) <nome1> <nome2> <nome-resultado sem espaços >
