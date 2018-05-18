@@ -228,475 +228,460 @@ int atribuirColuna(char Nome[], int coluna) {
 int transporMatriz(char nome[], char nomeResultado[])
 {
     celula *aux = lista;
-    int i,j;
-    float **matrizResultante = NULL;
+    celula *matrizResultante = lista;
+    int cont = 0,i,j;
+    int linhas,colunas;
     
-    //buscar matriz conforme o nome
-    if(aux == NULL)
-    {
-        return 1;
-    }
-    else
-    {
-        while(aux->prox != NULL)
-        {
-            if(strcmp(aux->nomeMatriz,nome) == 0)
-            { //montando a matriz-resultante sendo o inverso de LxC de matriz
-                *matrizResultante = malloc(aux->colunas * sizeof(float *));
-                
-                for(i=0;i< aux->linhas;i++)
-                {
-                    matrizResultante[i] = malloc(aux->linhas * sizeof(float));
-                }
-                //transpondo as matrizes
-                for(i=0; i< aux->linhas;i++)
-                {
-                    for(j=0;j<aux->colunas;j++)
-                    {
-                        matrizResultante[j][i] = aux->matriz[i][j];
-                    }
-                }
-                
-                //printando a matriz resultante
-                for(i=0; i< aux->linhas;i++)
-                {
-                    for(j=0;j<aux->colunas;j++)
-                    {
-                        printf("%6.2f ",matrizResultante[i][j]);
-                    }
-                    printf("/n");
-                }
-                return 0;
-            }
-            aux = aux->prox;
-        }
-    }
-    
-    //para ultimo elemento da lista de matrizes existentes
-    if(strcmp(aux->nomeMatriz,nome)==0)
-    {
-        *matrizResultante = malloc(aux->colunas * sizeof(float *));
+    //verifica se matriz que deseja transpor existe e faz ponteiro apontar para a matriz
+     while (aux != NULL)
+     {
         
-        for(i=0;i< aux->linhas;i++)
+        if (strcmp(nome, aux->nomeMatriz) == 0) 
         {
-            matrizResultante[i] = malloc(aux->linhas * sizeof(float));
-        }
-        //transpondo as matrizes
-        for(i=0; i< aux->linhas;i++)
-        {
-            for(j=0;j<aux->colunas;j++)
-            {
-                matrizResultante[j][i] = aux->matriz[i][j];
-            }
-        }
-        for(i=0; i< aux->linhas;i++)
-        {
-            for(j=0;j<aux->colunas;j++)
-            {
-                printf("%6.2f ",matrizResultante[i][j]);
-            }
-            printf("/n");
-        }
-        return 0;
-    }
-    else
-    {  return 1;}
-}
-
-
-int somarMatriz(char nome[],char nome1[],char nomeResultado[])
-{
-    celula *aux = lista;
-    int i,j;
-    float **matrizResultante = NULL;
-    int achou1=0,achou2=0;
-    
-    if(aux == NULL)
-    {
-        return 1;
-    }
-    else
-    {//procura a primeira matriz
-        while(aux->prox !=NULL)
-        {
-            if(strcmp(aux->nomeMatriz, nome)==0)
-            {
-                achou1 = 1;
-                break;
-            }
+            cont++;
+            break;
             
-            aux = aux->prox;
         }
-        //se nao achar a matriz antes da ultima posicao
-        if(achou1 == 0)
-        {
-            if(strcmp(aux->nomeMatriz, nome)==0)
-            {//procura a segunda matriz
-                while(aux->prox != NULL)
-                {
-                    if(strcmp(aux->nomeMatriz,nome1)==0)
-                    {
-                        achou2 = 1;
-                        break;
-                    }
-                    aux = aux->prox;
-                }
-            }
-            else
-            {
-                return 1;
-            }
-        }
-        
-        //verifica ultima posicao da segunda matriz
-        if(achou2 == 0)
-        {
-            if(strcmp(aux->nomeMatriz,nome1)==0)
-            {
-                achou2 = 1;
-            }
-            else
-            {
-                return 1;
-            }
-        }
-        
-        //se encontrar as duas matrizes
-        if(achou1 == 1 && achou2 == 1)
-        { //verifica se as matrizes tem o mesmo tamanho
-            if(aux->linhas == aux->linhas && aux->colunas == aux->colunas)
-            {
-                *matrizResultante = malloc(aux->linhas * sizeof(float *));
-                
-                for(j=0;j< aux->linhas;i++)
-                {
-                    matrizResultante[j] = malloc(aux->colunas * sizeof(float));
-                }
-                //somando as matrizes
-                for(i=0; i< aux->linhas;i++)
-                {
-                    for(j=0; j< aux->colunas;j++)
-                    {
-                        matrizResultante[i][j] = aux->matriz[i][j] + aux->matriz[i][j];
-                    }
-                }
-                for(i=0; i< aux->linhas;i++)
-                {
-                    for(j=0;j<aux->colunas;j++)
-                    {
-                        printf("%6.2f ",matrizResultante[i][j]);
-                    }
-                    printf("/n");
-                }
-                return 0;
-            }
-            else
-            {
-                return 1;
-            }
-        }
+        aux = aux->prox;
     }
-    return 0;
-}
 
+    
+
+    if(cont == 1)
+    {   //passa tamanho de linhas e colunas que a matriz resultante deve ter
+        linhas = aux->linhas;
+        colunas = aux->colunas;
+
+        //chama funcao cria matriz aonde vai ser criada a matriz resultante e la mesmo eh feito a verificacao se matriz resultante, que sera a nova matriz ja existe
+    	criarMatriz(linhas,colunas,nomeResultado); 
+
+        //faz ponteiro achar a matriz resultante criada e faz ponteiro apontar para a matriz
+    	while(matrizResultante != NULL)
+    	{
+        
+       		 if (strcmp(nomeResultado,matrizResultante->nomeMatriz) == 0) 
+       		{
+           	    cont++;
+            	break;
+            
+       		}
+
+        	matrizResultante = matrizResultante->prox;
+   		}
+   	}
+
+    if(cont==2)
+    {	//transposicao das matrizes
+        for(i=0;i < aux->linhas; i++)
+    	{
+    		for(j=0; j < aux->colunas;j++)
+    		{
+    			matrizResultante->matriz[i][j] = aux->matriz[i][j];
+    		}
+    	}
+
+        //printa matriz resultante
+    	for(i=0;i < aux->linhas; i++)
+    	{
+    		for(j=0; j < aux->colunas;j++)
+    		{
+    			printf("%6.2f ",matrizResultante->matriz[i][j]);
+    		}
+            printf("\n");
+    	}
+
+    }
+    else
+    {
+    	return 1;    //retornando 1 printa palavra erro
+    }
+
+ }
+
+int somarMatriz(char nome[],char nome2[],char nomeResultado[])
+{
+	celula *aux = lista;
+	celula *aux1 = lista;
+	celula *matrizResultante = lista;
+	int cont = 0,i,j;
+	int linhas,colunas;
+	
+    //verifica se a 1matriz que deseja somar existe e faz ponteiro apontar para a matriz
+	while(aux != NULL)
+	{
+		if(strcmp (nome,aux->nomeMatriz)==0)
+		{
+			cont++;
+			break;
+		}
+		aux = aux->prox;
+	}
+
+     //verifica se a 2matriz que deseja somar existe e faz ponteiro apontar para a matriz
+       while(aux1 != NULL)
+	   {
+		  if(strcmp (nome2,aux1->nomeMatriz)==0)
+		  {
+		     cont++;
+			 break;
+		  }
+		   aux1 = aux1->prox;
+	   }
+   
+
+
+	if(cont == 2)
+	{      //verificacao de as matrizes desejadas tem as mesmas dimensoes
+		if((aux->linhas == aux1->linhas) && (aux->colunas == aux1->colunas))
+		{	//passa tamanho de linhas e colunas que a matriz resultante deve ter			
+            linhas = aux->linhas;
+			colunas = aux->colunas;
+			criarMatriz(linhas,colunas,nomeResultado);
+			
+            //verifica se matrizresultante existe e faz ponteiro apontar para a matriz
+            while(matrizResultante != NULL)
+            {
+                if(strcmp(nomeResultado,matrizResultante->nomeMatriz)==0)
+                {
+                    cont++;
+                    break;
+                }
+                matrizResultante = matrizResultante->prox;
+            }
+        }
+        else
+         { 
+            return 1;
+        } 
+    }  
+    
+    else
+    {
+        return 1;
+    }
+
+    if(cont == 3)
+	{ 	//soma das matrizes
+        for(i=0;i<aux->linhas;i++)
+		{
+			for(j=0;j<aux->colunas;j++)
+			{
+				matrizResultante->matriz[i][j] = aux->matriz[i][j] + aux1->matriz[i][j];
+			}
+		}
+        //printa matriz resultante
+		for(i=0;i<aux->linhas;i++)
+		{
+			for(j=0;j<aux->colunas;j++)
+			{
+				 printf("%6.2f ",matrizResultante->matriz[i][j]);
+			 }
+			    printf("\n");
+		}    
+	}
+	else
+	{
+		return 1;
+	}
+	
+}
 
 int dividirMatriz(char nome[],char nome1[],char nomeResultado[])
 {
     celula *aux = lista;
-    int i,j;
-    float **matrizResultante = NULL;
-    int achou1=0,achou2=0;
+    celula *aux1 = lista;
+    celula *matrizResultante = lista;
+    int cont =0 ,i,j;
+    int linhas,colunas;
+
+    //verifica se a 1matriz que deseja somar existe e faz ponteiro apontar para a matriz
+    while(aux != NULL)
+    {
+        if(strcmp (nome,aux->nomeMatriz)==0)
+        {
+            cont++;
+            break;
+        }
+        aux = aux->prox;
+    }
     
-    if(aux == NULL)
+    //verifica se a 2matriz que deseja somar existe e faz ponteiro apontar para a matriz
+   
+    while(aux1 != NULL)
+    {
+        if(strcmp (nome1,aux1->nomeMatriz)==0)
+        {
+            cont++;
+            break;
+        }
+        aux1 = aux1->prox;
+    }
+   
+
+    if(cont == 2)
+    {   //verifica se a 1matriz e a 2matriz tem as mesmas dimensoes
+        if((aux->linhas == aux1->linhas) && (aux->colunas == aux1->colunas))
+        {  //anda por todos os elementos da 2matriz p verificar se nao existe elemento igual a zero, pois 2matriiz eh o denominador da divisao
+            for(i=0;i<aux1->linhas;i++)
+            {
+                for(j=0;j<aux1->colunas;j++)
+                {
+                    if(aux1->matriz[i][j]== 0)
+                    {
+                        return 1;
+                    }
+                }
+            }
+
+            //passa tamanho de linhas e colunas que a matriz resultante deve ter    
+            linhas = aux->linhas;
+            colunas = aux->colunas;
+            criarMatriz(linhas,colunas,nomeResultado);
+            
+            //verifica se a matriz resultante existe e faz ponteiro apontar para a matriz
+            while(matrizResultante != NULL)
+            {
+                if(strcmp(nomeResultado,matrizResultante->nomeMatriz)==0)
+                {
+                    cont++;
+                    break;
+                }
+                matrizResultante = matrizResultante->prox;
+            }
+        }
+        else
+        {
+            return 1;
+        }
+
+    } 
+    else
     {
         return 1;
     }
+        
+        if(cont==3)
+        {   //divisao das matrizes  
+            for(i=0; i< aux->linhas;i++)
+            {
+                for(j=0; j< aux->colunas;j++)
+                {
+                    matrizResultante->matriz[i][j] = aux->matriz[i][j] / aux1->matriz[i][j];
+                }
+            }
+
+            //printa a matriz resultante
+            for(i=0; i < aux->linhas;i++)
+            {
+                for(j=0; j<  aux->colunas; j++)
+                {
+                    printf("%6.2f ",matrizResultante->matriz[i][j]);
+                }
+                   printf("\n");
+            }
+
+        }    
     else
-    {//procura a primeira matriz
-        while(aux->prox !=NULL)
-        {
-            if(strcmp(aux->nomeMatriz, nome)==0)
-            {
-                achou1 = 1;
-                break;
-            }
-            
-            aux = aux->prox;
-        }
-        //se nao achar a matriz antes da ultima posicao
-        if(achou1 == 0)
-        {
-            if(strcmp(aux->nomeMatriz, nome)==0)
-            {
-                while(aux->prox != NULL)
-                {
-                    if(strcmp(aux->nomeMatriz,nome1)==0)
-                    {
-                        for(i=0; i< aux->linhas;i++)
-                        {
-                            for(j=0; j< aux->colunas;j++)
-                            {
-                                if(aux->matriz[i][j]==0)
-                                {
-                                    return 1;
-                                }
-                            }
-                        }
-                        achou2=1;
-                        break;
-                    }
-                    *aux=*aux->prox;
-                }
-            }
-            else
-            {
-                return 1;
-            }
-        }
-        
-        //verifica ultima posicao
-        if(achou2 == 0)
-        {
-            if(strcmp(aux->nomeMatriz,nome1)==0)
-            {
-                //verifica se tem zero em algum elemento da matriz2
-                for(i=0; i< aux->linhas;i++)
-                {
-                    for(j=0; j< aux->colunas;j++)
-                    {
-                        if(aux->matriz[i][j]==0)
-                        {
-                            return 1;
-                        }
-                    }
-                }
-                achou2 = 1;
-            }
-            else
-            {
-                return 1;
-            }
-        }
-        
-        //se encontrar as duas matrizes
-        if(achou1 == 1 && achou2 == 1)
-        { //verifica se as matrizes tem o mesmo tamanho
-            if(aux->linhas == aux->linhas && aux->colunas == aux->colunas)
-            {
-                *matrizResultante = malloc(aux->linhas * sizeof(float *));
-                
-                for(j=0;j< aux->linhas;i++)
-                {
-                    matrizResultante[j] = malloc(aux->colunas * sizeof(float));
-                }
-                //dividindo as matrizes
-                for(i=0; i< aux->linhas;i++)
-                {
-                    for(j=0; j< aux->colunas;j++)
-                    {
-                        matrizResultante[i][j] = aux->matriz[i][j] / aux->matriz[i][j];
-                    }
-                }
-                for(i=0; i < aux->linhas;i++)
-                {
-                    for(j=0; j<  aux->colunas; j++)
-                    {
-                        printf("%6.2f ",matrizResultante[i][j]);
-                    }
-                    printf("/n");
-                }
-                return 0;
-            }
-            else
-            {
-                return 1;
-            }
-            
-        }
-    }
+    {
     return 1;
+    }
 }
 
+
 int multiplicarMatriz(char nome[],char nome1[],char nomeResultado[])
-{
-    celula *aux = lista;
-    int i,j,k, soma = 0;
-    float **matrizResultante = NULL;
-    int achou1 = 0, achou2 = 0;
+{   celula *aux = lista;
+    celula *aux1 = lista;
+    celula *matrizResultante = lista;
+    int cont = 0 ,i,j;
+    int soma = 0,k;
+    int linhas,colunas;
+
+    //verifica se 1matriz existe e faz ponteiro apontar para a matriz
+    while(aux != NULL)
+    {
+        if(strcmp (nome,aux->nomeMatriz)==0)
+        {
+            cont++;
+            break;
+        }
+        aux = aux->prox;
+    }
     
-    if(aux==NULL) {
+    //verifica se 2matriz existe e faz ponteiro apontar para a matriz
+    if(cont==1)
+    { 
+       while(aux1 != NULL)
+       {
+          if(strcmp (nome1,aux1->nomeMatriz)==0)
+          {
+             cont++;
+             break;
+          }
+           aux1 = aux1->prox;
+       }
+    }
+    else
+    {
         return 1;
     }
-    else {
-        //procura primeira matrizes
-        while(aux->prox != NULL) {
-            if(strcmp(aux->nomeMatriz,nome)==0) {
-                achou1 = 1;
-                break;
-            }
-            aux = aux->prox;
-        }
-        
-        if(achou1 == 0) {//confere ultima posicao da lista se contem matriz1
-            if(strcmp(aux->nomeMatriz, nome)==0) {//procura matriz 2
-                while(aux->prox != NULL)
+
+    if(cont==2)
+    {   //verifica se a coluna de 1matriz eh igual a linha da 2matriz
+        if(aux->colunas == aux1->linhas)
+        {
+             //passa tamanho de linhas e colunas que a matriz resultante deve ter  
+            linhas = aux->linhas;
+            colunas = aux1->colunas;
+            criarMatriz(linhas,colunas,nomeResultado);
+            
+            //verifica se matriz resultante existe e faz ponteiro apontar para a matriz
+            while(matrizResultante != NULL)
+            {
+                if(strcmp(nomeResultado,matrizResultante->nomeMatriz)==0)
                 {
-                    if(strcmp(aux->nomeMatriz,nome1)==0) {
-                        achou2 = 1;
-                        break;
-                    }
-                    aux = aux->prox;
+                    cont++;
+                    break;
                 }
+                matrizResultante = matrizResultante->prox;
             }
-        }
-        else {
-            return 1;
-        }
-        
-        //verifica ultima posicao caso de matriz 2 na ultima posicao da lista
-        if(achou2 == 0) {
-            if(strcmp(aux->nomeMatriz,nome1)==0) {
-                achou2 = 1;
-            }
-            else {
-                return 1;
-            }
-        }
-        
-        //caso as duas matrizes existirem
-        if(achou1 == 1 && achou2 == 1) { //verifica se Coluna de matriz 1 == Linha de matriz 2
-            if(aux->colunas == aux->linhas) {
-                // i < linhas matriz1
-                for(i=0;i<aux->linhas;i++) {
+
+            if(cont == 3)
+            {   //multiplicacao das matrizes
+                for(i=0;i<aux->linhas;i++)
+                 {
                     // j < colunas matriz2
-                    for(j=0;j<aux->colunas;j++) {
+                    for(j=0;j<aux->colunas;j++) 
+                    {
                         // k < linhas matriz2
-                        for(k=0;k<aux->linhas; k++) { //matriz1 x matriz2
-                            soma = soma + (aux->matriz[i][k] * aux->matriz[k][j]);
+                        for(k=0;k<aux->linhas; k++) 
+                        { //matriz1 x matriz2
+                            soma = soma + (aux->matriz[i][k] * aux1->matriz[k][j]);
                         }
                         //armazena soma na matriz matrizResultante
-                        matrizResultante[i][j] = soma;
+                        matrizResultante->matriz[i][j] = soma;
                         
                         //zera soma novamente para cacular o proximo elemento
                         soma = 0;
                     }
-                }
-                
-                //exibe matrizResultante
-                // i < linha matriz1
-                for(i=0;i<aux->linhas;i++)
+                 }
+
+                 //printa matriz resultante
+                 for(i=0;i<aux->linhas;i++)
                 {
-                    for(j=0;j<aux->colunas;j++)
+                    for(j=0;j<aux1->colunas;j++)
                     {
-                        printf("%6.2f",matrizResultante[i][j]);
+                        printf("%6.2f",matrizResultante->matriz[i][j]);
                     }
                     printf("\n");
                 }
-                
             }
             else
             {
                 return 1;
-            }
+            }   
         }
+        else
+        {
+            return 1;
+        }   
     }
-    return 1;
-}
-
-int multiplicarElementos(char nome1[],char nome2[],char nomeResultado[])
-{
-    celula *aux = lista;
-    int i,j;
-    float **matrizResultante = NULL;
-    int achou1=0,achou2=0;
-    
-    if(aux == NULL)
+    else
     {
         return 1;
     }
+}
+
+int multiplicarElementos(char nome[],char nome1[],char nomeResultado[])
+{   celula *aux = lista;
+    celula *aux1 = lista;
+    celula *matrizResultante= lista;
+    int cont= 0,i,j;
+    int linhas,colunas;
+
+
+    //verifica se 1matriz existe e faz ponteiro apontar para a matriz
+    while(aux != NULL)
+    {
+        if(strcmp (nome,aux->nomeMatriz)==0)
+        {
+            cont++;
+            break;
+        }
+        aux = aux->prox;
+    }
+    
+    if(cont==1)
+    {   //verifica se 2matriz existe e faz ponteio apontar para a matriz
+       while(aux1 != NULL)
+       {
+          if(strcmp (nome1,aux1->nomeMatriz)==0)
+          {
+             cont++;
+             break;
+          }
+           aux1 = aux1->prox;
+       }
+    }
     else
-    {//procura a primeira matriz
-        while(aux->prox !=NULL)
-        {
-            if(strcmp(aux->nomeMatriz, nome1)==0)
+    {
+        return 1;
+    }
+
+    if(cont == 2)
+    {   //verifica se a 1matriz e a 2matriz tem as mesmas dimensoes 
+        if(aux->linhas == aux1->linhas && aux->colunas == aux1->colunas)
+        {   
+            //passa tamanho de linhas e colunas que a matriz resultante deve ter  
+            linhas = aux->linhas;
+            colunas = aux->colunas;
+            criarMatriz(linhas,colunas,nomeResultado);
+
+
+            //verifica se matriz resultante existe e faz ponteiro apontar para matriz
+             while(matrizResultante != NULL)
             {
-                achou1 = 1;
-                break;
-            }
-            
-            aux = aux->prox;
-        }
-        //se nao achar a matriz antes da ultima posicao
-        if(achou1 == 0)
-        {
-            if(strcmp(aux->nomeMatriz, nome1)==0)
-            {
-                while(aux->prox != NULL)
+                if(strcmp(nomeResultado,matrizResultante->nomeMatriz)==0)
                 {
-                    if(strcmp(aux->nomeMatriz,nome2)==0)
-                    {
-                        achou2 = 1;
-                        break;
-                    }
-                    aux=aux->prox;
+                    cont++;
+                    break;
                 }
+                matrizResultante = matrizResultante->prox;
             }
-            else
-            {
-                return 1;
-            }
-        }
-        
-        //verifica ultima posicao
-        if(achou2 == 0)
-        {
-            if(strcmp(aux->nomeMatriz,nome2)==0)
-            {
-                achou2 = 1;
-            }
-            else
-            {
-                return 1;
-            }
-        }
-        
-        //se encontrar as duas matrizes
-        if(achou1 == 1 && achou2 == 1)
-        { //verifica se as matrizes tem o mesmo tamanho
-            if(aux->linhas == aux->linhas && aux->colunas == aux->colunas)
-            {
-                *matrizResultante = malloc(aux->linhas * sizeof(float *));
-                
-                for(j=0;j< aux->linhas;i++)
-                {
-                    matrizResultante[j] = malloc(aux->colunas * sizeof(float));
-                }
-                //multiplicando as matrizes
+
+            if(cont == 3)
+            {   //multiplicacao dos elementos das matrizes
                 for(i=0; i< aux->linhas;i++)
                 {
                     for(j=0; j< aux->colunas;j++)
                     {
-                        matrizResultante[i][j] = aux->matriz[i][j] * aux->matriz[i][j];
+                        matrizResultante->matriz[i][j] = aux->matriz[i][j] * aux1->matriz[i][j];
                     }
                 }
+
+                //printa matriz resultante
                 for(i=0; i< aux->linhas;i++)
                 {
                     for(j=0;j<aux->colunas;j++)
                     {
-                        printf("%6.2f ",matrizResultante[i][j]);
+                        printf("%6.2f ",matrizResultante->matriz[i][j]);
                     }
-                    printf("/n");
+                    printf("\n");
                 }
-                return 0;
             }
             else
             {
                 return 1;
             }
-            
+        }
+        else
+        {
+            return 1;
         }
     }
-    return 1;
-}
+    else
+    {
+        return 1;
+    }
+ }
 
 
