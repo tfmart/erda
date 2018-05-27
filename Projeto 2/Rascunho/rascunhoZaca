@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct arvore{
+    int freq;
+    char palavra[20];
+    struct arvore *esq, *dir;
+};
+
+typedef struct arvore No;
+
+int main() 
+{
+    char palavra[20];
+    FILE * pFile;
+
+    No *aux;
+    aux = (No *)malloc(sizeof(No));
+
+    pFile = fopen ("teste.txt" , "r");
+
+    if (pFile == NULL)
+    {
+        printf("Erro ao abrir o arquivo");
+    }
+    else
+    {
+        while ( != EOF)//precisa fazer a verificacao do EOF
+        {
+            /*
+
+            - aqui dentro inserir fscanf para pegar palavras do arquivo.
+            - tentar encaixar a parte de insercao na arvore aqui.
+
+            */
+        }
+    }
+    return 0;
+}
+
+/*
+
+void insere(No **pRaiz, No *palavra);
+void emordem(struct No *pRaiz);
+
+void insere(No **pRaiz, No *palavra)
+{
+    if (*pRaiz == NULL)
+    {
+        *pRaiz = (No *)malloc(sizeof(No));
+        (*pRaiz)->esq = NULL;
+        (*pRaiz)->dir = NULL;
+        strcpy((*pRaiz)->chave, palavra);
+    }
+    else
+    {
+        if(strcmp(palavra, (*pRaiz->chave)) == 0)
+        {
+           *pRaiz->freq++;
+        }
+        else if (strcmp(palavra, (*pRaiz->chave)) < 0)
+        {
+            insere(&((*pRaiz)->esq), palavra);
+        }
+        else if (strcmp(palavra, (*pRaiz->chave)) > 0)
+        {
+            insere(&((*pRaiz)->dir), palavra);
+        }
+    }
+}
+
+*/
