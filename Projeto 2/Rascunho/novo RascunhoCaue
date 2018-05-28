@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+
+struct no{
+
+char palavra[50],chave;
+struct no *esq,*dir;
+};
+
+
+int percorre_arvore(no *raiz,char palavra[]){
+
+if(raiz==NULL){
+
+return 0; //palavra não foi encontrada, pode ser inserida
+
+}
+else if(raiz->chave==palavra){
+
+return 1; //NÃO INSERE SE JÁ EXISTIR NA ARVORE, INCREMENTA FREQUENCIA
+}
+
+else if(raiz->chave < palavra){
+return (percorre_arvore(raiz->dir,palavra[]);
+
+}
+else if(raiz->chave > palavra){
+
+return(percorre_arvore(raiz->esq,palavra[]);
+}
+
+}
+
+int insere(no **raiz,palavra[]){
+
+int resultado;
+
+resultado=percorre_arvore(raiz,palavra); //recebe o resultado da função que percorreu a arvore
+
+if(resultado==0){
+
+
+if(*raiz==NULL){
+*raiz=(no*)malloc(sizeof(no));
+(*raiz)->chave=palavra;
+(*raiz)->esq=NULL;
+(*raiz)->dir=NULL;
+}
+
+else if(palavra==(*raiz)->chave){
+
+return 0;
+
+}
+
+else if(palavra<(*raiz)->chave){
+
+return(insere(&(*raiz)->esq,palavra[]));
+}
+
+else if(palavra>(*raiz)->chave){
+
+return (insere(&(*raiz)->dir,palavra[]));
+}
+
+}
+
+
+else{
+
+return -1;
+
+}
+}
+int main(int argc,char *argv[]){
+
+int i,cont=0,nNUMERO;
+char palavra[50];
+
+
+
+while((scanf ("%s", palavra)) != EOF){
+
+
+
+
+}
+
+printf("%d\n",i);
+
+return 0;
+}
+
+
