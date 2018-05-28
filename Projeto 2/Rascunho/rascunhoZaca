@@ -1,73 +1,83 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include<stdlib.h>
+#include<string.h>
 
-struct arvore{
-    int freq;
-    char palavra[20];
-    struct arvore *esq, *dir;
+struct no{
+    int freq = 0;
+    char palavra[50];
+    struct no *esq,*dir;
 };
 
-typedef struct arvore No;
 
-int main() 
+int percorre_arvore(no *raiz,char palavra[]);
+int insere(no **raiz,palavra[]);
+
+
+int main(int argc,char *argv[])
 {
-    char palavra[20];
-    FILE * pFile;
+    int i,cont=0,nNUMERO;
+    char palavra[50];
 
-    No *aux;
-    aux = (No *)malloc(sizeof(No));
-
-    pFile = fopen ("teste.txt" , "r");
-
-    if (pFile == NULL)
+    while((scanf ("%s", palavra)) != EOF)
     {
-        printf("Erro ao abrir o arquivo");
-    }
-    else
-    {
-        while ( != EOF)//precisa fazer a verificacao do EOF
-        {
-            /*
 
-            - aqui dentro inserir fscanf para pegar palavras do arquivo.
-            - tentar encaixar a parte de insercao na arvore aqui.
-
-            */
-        }
+    
     }
+    printf("%d\n",i);
+
     return 0;
 }
 
-/*
-
-void insere(No **pRaiz, No *palavra);
-void emordem(struct No *pRaiz);
-
-void insere(No **pRaiz, No *palavra)
+int percorre_arvore(no *raiz,char palavra[])
 {
-    if (*pRaiz == NULL)
+    if(raiz == NULL)
     {
-        *pRaiz = (No *)malloc(sizeof(No));
-        (*pRaiz)->esq = NULL;
-        (*pRaiz)->dir = NULL;
-        strcpy((*pRaiz)->chave, palavra);
+        return 0; //palavra não foi encontrada, pode ser inserida
     }
-    else
+    else if(strcmp(raiz->palavra, palavra) == 0)
     {
-        if(strcmp(palavra, (*pRaiz->chave)) == 0)
-        {
-           *pRaiz->freq++;
-        }
-        else if (strcmp(palavra, (*pRaiz->chave)) < 0)
-        {
-            insere(&((*pRaiz)->esq), palavra);
-        }
-        else if (strcmp(palavra, (*pRaiz->chave)) > 0)
-        {
-            insere(&((*pRaiz)->dir), palavra);
-        }
+        return 1; //NÃO INSERE SE JÁ EXISTIR NA ARVORE, INCREMENTA FREQUENCIA
+    }
+    else if(strcmp(raiz->palavra, palavra) < 0)
+    {
+        return (percorre_arvore(raiz->dir,palavra[]);
+    }
+    else if(strcmp(raiz->palavra, palavra) > 0)
+    {
+        return(percorre_arvore(raiz->esq,palavra[]);
     }
 }
 
-*/
+int insere(no **raiz,palavra[])
+{
+    int resultado;
+
+    resultado = percorre_arvore(raiz,palavra); //recebe o resultado da função que percorreu a arvore
+
+    if(resultado == 0)
+    {
+        if(*raiz == NULL)
+        {
+            *raiz = (no*)malloc(sizeof(no));
+            (*raiz)->chave=palavra;
+            (*raiz)->esq=NULL;
+            (*raiz)->dir=NULL;
+        }
+        else if(strcmp(raiz->palavra, palavra) == 0)
+        {
+            return 0;
+        }
+        else if(strcmp(raiz->palavra, palavra) > 0)
+        {
+            return(insere(&(*raiz)->esq,palavra[]));
+        }
+        else if(strcmp(raiz->palavra, palavra) < 0)
+        {
+            return (insere(&(*raiz)->dir,palavra[]));
+        }
+    }
+    else
+    {
+        return -1;
+    }
+}
