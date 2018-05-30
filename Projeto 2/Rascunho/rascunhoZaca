@@ -3,28 +3,40 @@
 #include<string.h>
 
 struct no{
-    int freq = 0;
-    char palavra[50];
-    struct no *esq,*dir;
+    int freq;
+    char chave[50], palavra[50];
+    struct no *esq, *dir;
 };
 
+typedef struct no no;
 
 int percorre_arvore(no *raiz,char palavra[]);
-int insere(no **raiz,palavra[]);
+int insere(no **raiz,char palavra[]);
 
-
-int main(int argc,char *argv[])
+int main(int argc, char *argv[])
 {
-    int i,cont=0,nNUMERO;
+    no *raiz;
+    int i, cont = 0, nNUMERO, resposta;
     char palavra[50];
+
+    raiz = NULL;
 
     while((scanf ("%s", palavra)) != EOF)
     {
-
-    
+        resposta = insere(&raiz, palavra);
+        if(resposta == 0)
+        {
+            printf("Ja existe na arvore\n");
+        }
+        else if(resposta == 1)
+        {
+            printf("Palavra inserida com sucesso\n");
+        }
+        else if(resposta == -1)
+        {
+            printf("Palavra nao foi inserida\n");
+        }
     }
-    printf("%d\n",i);
-
     return 0;
 }
 
@@ -34,50 +46,91 @@ int percorre_arvore(no *raiz,char palavra[])
     {
         return 0; //palavra não foi encontrada, pode ser inserida
     }
-    else if(strcmp(raiz->palavra, palavra) == 0)
+    else if(strcmp(raiz->chave, palavra) == 0)
     {
         return 1; //NÃO INSERE SE JÁ EXISTIR NA ARVORE, INCREMENTA FREQUENCIA
     }
-    else if(strcmp(raiz->palavra, palavra) < 0)
+    else if(strcmp(raiz->chave, palavra) < 0)
     {
-        return (percorre_arvore(raiz->dir,palavra[]);
+        return (percorre_arvore(raiz->dir,palavra));
     }
-    else if(strcmp(raiz->palavra, palavra) > 0)
+    else if(strcmp(raiz->chave, palavra) > 0)
     {
-        return(percorre_arvore(raiz->esq,palavra[]);
+        return (percorre_arvore(raiz->esq,palavra));
     }
 }
 
-int insere(no **raiz,palavra[])
+int insere(no **raiz,char palavra[])
 {
-    int resultado;
+    int resultado, frequencia = 0;
 
-    resultado = percorre_arvore(raiz,palavra); //recebe o resultado da função que percorreu a arvore
+    resultado = percorre_arvore(&raiz, palavra); //recebe o resultado da função que percorreu a arvore
 
-    if(resultado == 0)
+    switch (resultado) //fiz isso por graca de otimizacao msm kkkkk sem mais motivos. Codigo antigo comentado abaixo.
+    {
+        case 0:
+            if(*raiz == NULL)
+            {
+                (*raiz) = (no*)malloc(sizeof(no));
+                strcpy((*raiz)->chave, palavra);
+                (*raiz)->esq = NULL;
+                (*raiz)->dir = NULL;
+            }
+            else if(strcmp((*raiz)->chave, palavra) > 0)
+            {
+                return(insere(&(*raiz)->dir ,palavra));
+            }
+            else if(strcmp((*raiz)->chave, palavra) < 0)
+            {
+                return (insere(&(*raiz)->esq, palavra));
+            }
+            else
+            {
+                return -1;
+            }
+        break;
+    
+        case 1: //caso palavra ja tenha sido encontrada na arvore, apenas incrementa freq.
+            {
+                frequencia = (*raiz)->freq;
+                frequencia++;
+                (*raiz)->freq = frequencia;
+            }
+            break;
+
+        default:
+            break;
+    }
+}
+
+/*
+
+ if(resultado == 0)
     {
         if(*raiz == NULL)
         {
-            *raiz = (no*)malloc(sizeof(no));
-            (*raiz)->chave=palavra;
-            (*raiz)->esq=NULL;
-            (*raiz)->dir=NULL;
+            (*raiz) = (no*)malloc(sizeof(no));
+            strcpy((*raiz)->chave, palavra);
+            (*raiz)->esq = NULL;
+            (*raiz)->dir = NULL;
         }
-        else if(strcmp(raiz->palavra, palavra) == 0)
+        else if(strcmp((*raiz)->chave, palavra) > 0)
         {
-            return 0;
+            return(insere(&(*raiz)->dir ,palavra));
         }
-        else if(strcmp(raiz->palavra, palavra) > 0)
+        else if(strcmp((*raiz)->chave, palavra) < 0)
         {
-            return(insere(&(*raiz)->esq,palavra[]));
+            return (insere(&(*raiz)->esq, palavra));
         }
-        else if(strcmp(raiz->palavra, palavra) < 0)
+        else
         {
-            return (insere(&(*raiz)->dir,palavra[]));
+            return -1;
         }
     }
-    else
+    if(resultado == 1)
     {
-        return -1;
+        //Chamar funcao para aumentar frequencia da palavra
+        raiz->freq = (raiz->freq) + 1;        
     }
-}
+
+*/
