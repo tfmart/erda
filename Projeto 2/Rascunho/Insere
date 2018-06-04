@@ -12,20 +12,20 @@ struct no {
 
 typedef struct no celula;
 
-//int freq(celula **raiz){
+int freq(celula **raiz){
+int freq=1;
+
+freq=freq+(*raiz)->freq;
+freq++;
+(*raiz)->freq=freq;
+
+	return ((*raiz)->freq);
 
 
-//freq=(*raiz)->freq;
-//freq++;
-//(*raiz)->freq=freq;
-
-	//return ((*raiz)->freq);
-
-
-//}
+}
 
 int insere(celula **raiz, char palavra[]) {
-	int freq=0;
+	
     celula *aux=(*raiz);
     
     if ((*raiz) == NULL)
@@ -40,9 +40,9 @@ int insere(celula **raiz, char palavra[]) {
     
     else if (strcmp((*raiz)->chave, palavra) == 0){
 
-	//freq(celula &(*raiz));
+	
 
-        return 0;
+        return (freq( &(*raiz)));
 
     }
     
@@ -70,7 +70,7 @@ while((scanf ("%s", palavra)) != EOF){
 
 resposta=insere(&lista,palavra);
 
- printf("%d\n",resposta);
+ printf(" %s %d\n",palavra,resposta);
 
 }
 
