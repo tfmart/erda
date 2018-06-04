@@ -3,17 +3,12 @@
 
 int time(void)
 {
-    clock_t Ticks[2];
-    Ticks[0] = clock();
-    //O código a ter seu tempo de execução medido ficaria neste ponto.
-    Ticks[1] = clock();
-    
-    double Tempo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
-    
-    printf("Tempo gasto: %g ms.", Tempo);
-    getchar();
-    
-    return 0;
+    gettimeofday(&t0, 0);
+
+    //code
+
+    gettimeofday(&t1, 0);
+    long long elapsed = (t1.tv_sec-t0.tv_sec)*1000000LL + t1.tv_usec-t0.tv_usec;
 }
 
 Utilizar no item OPCIONAL 2 do projeto, onde precisa mostrar o tempo de busca.
