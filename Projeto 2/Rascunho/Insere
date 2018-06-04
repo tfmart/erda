@@ -10,15 +10,22 @@ struct no {
 
 typedef struct no celula;
 
-int freq(celula **raiz)
+int freq(celula **raiz);
+int insere(celula **raiz, char palavra[]);
+
+int main(int argc,char *argv[]) 
 {
-    int freq = 1;
+    celula *lista = NULL;
+    int op, resposta;
+    char palavra[20];
+                   
+    while((scanf ("%s", palavra)) != EOF)
+    {
+        resposta = insere(&lista,palavra);
+        printf("%6d - %s\n",resposta, palavra);
+    }
 
-    freq = freq + (*raiz)->freq;
-    freq++;
-    (*raiz)->freq = freq;
-
-	return ((*raiz)->freq);
+    return 0;
 }
 
 int insere(celula **raiz, char palavra[]) 
@@ -37,28 +44,23 @@ int insere(celula **raiz, char palavra[])
     {
         return (freq( &(*raiz)));
     }
-    else if (strcmp(palavra, (*raiz)->chave) > 0)
+    else if (strcmp(palavra,(*raiz)->chave) > 0)
     { 
         return(insere(&(*raiz)->dir, palavra));
     }
-    else if (strcmp(palavra, (*raiz)->chave) < 0)
+    else if (strcmp(palavra,(*raiz)->chave) < 0)
     {
         return (insere(&(*raiz)->esq, palavra));
     }
 }
 
-int main(int argc,char *argv[]) 
+int freq(celula **raiz)
 {
-    celula *lista = NULL;
-    int op, resposta;
-    char palavra[20];
-                   
-    while((scanf ("%s", palavra)) != EOF)
-    {
-        resposta = insere(&lista,palavra);
-        printf("%s %d\n",palavra,resposta);
-    }
-    
-    system("pause");
-    return 0;
+    int freq;
+
+    freq = (*raiz)->freq;
+    freq++;
+    (*raiz)->freq = freq;
+
+	return ((*raiz)->freq + 1);
 }
