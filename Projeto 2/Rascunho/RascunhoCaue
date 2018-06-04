@@ -31,8 +31,14 @@ return 0;
 makefile:
 
 
-projeto:
-gcc -c main.c
-gcc -o main main.o
-./main < teste.txt
+##Makefile Projeto 2 (Rascunho Caue) ## 
+
+all: projeto 
+
+projeto: main.o 
+    gcc -o Main main.o 	
+    ./Main < teste.txt 
+    
+main.o: main.c 	
+     gcc -c main.c
 
