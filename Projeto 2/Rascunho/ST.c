@@ -4,9 +4,10 @@
 #include<stdlib.h>
 #include<string.h>
 
-
 typedef struct arvore celula;
 typedef struct tipo_item t_item;
+
+
 int insere(celula **raiz, char palavra[]) 
 {	
     celula *aux = (*raiz);
@@ -15,7 +16,7 @@ int insere(celula **raiz, char palavra[])
     {
         (*raiz) = (celula *)malloc(sizeof(celula));
 	
-	aloca_item(&(*raiz)->item);
+		aloca_item(&(*raiz)->item);
 
         strcpy((*raiz)->item->palavra, palavra);
         (*raiz)->esq = NULL;
@@ -24,7 +25,7 @@ int insere(celula **raiz, char palavra[])
     }
     else if(strcmp((*raiz)->item->palavra, palavra) == 0)
     {
-	frequencia( &(*raiz)->item);
+		frequencia( &(*raiz)->item);
         return 1;
     }
     else if (strcmp(palavra,(*raiz)->item->palavra) > 0)
