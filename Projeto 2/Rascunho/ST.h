@@ -3,3 +3,4 @@ struct arvore {
    tipo_item *item;
 };
 
+typedef struct arvore celula;
