@@ -1,1 +1,2 @@
 
+//TODAS AS FUNÇOES
