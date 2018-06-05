@@ -1,12 +1,12 @@
+#include "Item.h"
 #include"ST.h"
-
-struct tipo_item{
-int freq;
-char palavra[20];
-
-};
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 
 
+typedef struct arvore celula;
+typedef struct tipo_item t_item;
 int insere(celula **raiz, char palavra[]) 
 {	
     celula *aux = (*raiz);
@@ -14,6 +14,9 @@ int insere(celula **raiz, char palavra[])
     if ((*raiz) == NULL)
     {
         (*raiz) = (celula *)malloc(sizeof(celula));
+	
+	aloca_item(&(*raiz)->item);
+
         strcpy((*raiz)->item->palavra, palavra);
         (*raiz)->esq = NULL;
         (*raiz)->dir = NULL;
@@ -21,7 +24,8 @@ int insere(celula **raiz, char palavra[])
     }
     else if(strcmp((*raiz)->item->palavra, palavra) == 0)
     {
-        return (freq( &(*raiz)));
+	frequencia( &(*raiz)->item);
+        return 1;
     }
     else if (strcmp(palavra,(*raiz)->item->palavra) > 0)
     { 
