@@ -6,5 +6,5 @@ struct tipo_item{
 typedef struct arvore celula;
 typedef struct tipo_item t_item;
 
-void frequencia(t_item **item);
+int frequencia(t_item **item);
 int aloca_item(t_item **item);
