@@ -1,12 +1,11 @@
 #include "Item.h"
-#include"ST.h"
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include "ST.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct arvore celula;
 typedef struct tipo_item t_item;
-
 
 int insere(celula **raiz, char palavra[]) 
 {	
@@ -25,8 +24,7 @@ int insere(celula **raiz, char palavra[])
     }
     else if(strcmp((*raiz)->item->palavra, palavra) == 0)
     {
-		frequencia( &(*raiz)->item);
-        return 1;
+        return (frequencia(&(*raiz)->item));
     }
     else if (strcmp(palavra,(*raiz)->item->palavra) > 0)
     { 
