@@ -15,7 +15,7 @@ int frequencia(t_item **item)
     frequencia++;
     (*item)->freq = frequencia;
 
-    return((*item)->freq + 1);
+  return 0;
 }
 
 int aloca_item(t_item **item)
