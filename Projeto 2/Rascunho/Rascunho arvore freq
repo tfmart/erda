@@ -1,0 +1,49 @@
+//main
+celula *lista_freq = NULL;
+cria_novaArvore(&lista_freq,&lista);
+
+//item.h
+struct tipo_item{
+	int freq;
+	char palavra[20];
+struct tipo_item *prox;
+};
+
+
+//ST.c
+int cria_novaArvore(celula **raiz_freq, celula **raiz)
+{
+	cria_novaArvore(*raiz->dir);
+	nova_arvore(**raiz_freq,**raiz);
+	cria_novaArvore(*raiz->esq);
+	
+}
+
+//ideia para passar os valores de freq da arvore de palavras, para uma nova arvore somente com as frequencias
+
+int novaArvore(celula **raiz_freq,celula **raiz)
+{
+	if(raiz_freq != NULL)
+	{
+		
+		(*raiz_freq) = (celula *)malloc(sizeof(celula));
+		
+		(*raiz_freq)->item->freq = (*raiz)->item->freq;
+		(*raiz_freq)->esq = NULL;
+		(*raiz_freq)->dir = NULL;
+		return 0;
+	}
+	if((*raiz)->item->freq < (*raiz_freq)->item->freq)
+	{
+		return novaArvore((*raiz_freq)->esq,(*raiz)->item->freq); 
+	}
+	if((*raiz)->item->freq > (*raiz_freq)->item->freq)
+	{
+		return novaArvore((*raiz_freq)->dir,(*raiz)->item->freq); 
+	}
+	if((*raiz)->item->freq == (*raiz_freq)->item->freq)
+	{	//se for igual a frequencia nao se cria outra folha e sim uma lista "para tras" do primeiro no com a mesma frequencia e organizar por ordem alfabetica a ordem da lista.
+		return novaArvore((*raiz_freq)->prox,(*raiz)->item->prox); 
+	}
+	
+}
