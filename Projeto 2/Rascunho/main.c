@@ -10,44 +10,52 @@ typedef struct tipo_item t_item;
 int main(int argc,char *argv[]) 
 {
     celula *lista = NULL;
-    int numero,op, i,j, resposta;
+    int numero,op, i,j;
     char palavra[20];
- 
-	for(i=0;i<argc;i++)
-	{
-		if(argv[i][0] == '-')
-		{
-			if(argv[i][1] == 'n')
-			{ 
-				numero = converte(argv[i]);
-			}
-		}
-	}
+                  
 
-	printf("%d",numero);
+ 
+for(i=0;i<argc;i++){
+
+if(argv[i][0] == '-'){
+if(argv[i][1]== 'n'){ 
+
+numero = converte(argv[i]);}}
+
+}
+
+
 
     while((scanf ("%s", palavra)) != EOF)
     {
-		for(j = 0; j < numero; j++)
-		{
-        	resposta = insere(&lista, palavra);
-        	printf("%6d - %s\n",resposta, palavra);
-        }
+
+        insere(&lista, palavra);
+        
     }
+
+
+cria_arvore(lista);
+
 
     return 0;
 }
 
-int converte(char caracter[])
-{
-	int tamanho = 0,i, X = 1,numero = 0;
+int converte(char caracter[]){
 
-	tamanho = strlen(caracter);
+int tamanho=0,i, X=1,numero=0;
 
-	for(i = tamanho - 1; i > 1; i--)
-	{
-		numero+=(caracter[i] - '0')*X;
-		X*=10;
-	}
-	return numero;
+tamanho=strlen(caracter);
+
+
+
+for(i=tamanho-1;i>1;i--){
+
+
+numero+=(caracter[i]-'0')*X;
+
+X*=10;
+}
+return numero;
+
+
 }
