@@ -1,6 +1,7 @@
 struct tipo_item{
 	int freq;
 	char palavra[20];
+struct tipo_item *prox;
 };
 
 typedef struct arvore celula;
