@@ -8,3 +8,4 @@ struct arvore{
 typedef struct arvore celula;
 
 int insere(celula **raiz, char palavra[]);
+void cria_arvore(celula *raiz);
