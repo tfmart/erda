@@ -1,11 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "Item.h"
-#include"ST.h"
+#include "ST.h"
 
-typedef struct arvore celula;
-typedef struct tipo_item t_item;
+int converte(char caracter[]);
+
 
 int main(int argc,char *argv[]) 
 {
@@ -25,18 +24,18 @@ numero = converte(argv[i]);}}
 }
 
 
-
     while((scanf ("%s", palavra)) != EOF)
+
     {
 
-        insere(&lista, palavra);
         
+        insere(&lista,palavra);
     }
 
 
 cria_arvore(lista,&lista2);
 
-printa
+printa(lista);
 
 
     return 0;
