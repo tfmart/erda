@@ -27,7 +27,7 @@ int aloca_item(t_item **item)
 int armazena(celula **raiz,int freq,char palavra[]){
 
 
-(*raiz)->item=(celula*)malloc(sizeof(celula));
+(*raiz)->item=(t_item*)malloc(sizeof(t_item));
 
 strcpy((*raiz)->item->palavra,palavra);
 (*raiz)->item->freq=freq;
@@ -37,9 +37,9 @@ return 0;}
 
 void lista(celula *raiz, celula **raiz_freq){
 
-lista *aux=(lista*)malloc(sizeof(lista));
+ t_item *aux=(t_item*)malloc(sizeof(t_item));
 
-lista *auxiliador=(lista*)malloc(sizeof(lista));
+ t_item *auxiliador=(t_item*)malloc(sizeof(t_item));
 
 auxiliador->prox=NULL;
 
@@ -57,7 +57,7 @@ else{
 
 while(aux->prox!=NULL){
 aux=aux->prox;
-aux->prox=auxiliador;}}
+aux->prox=auxiliador;}
 
 }
 
