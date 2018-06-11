@@ -11,4 +11,4 @@ void cria_arvore(celula *raiz, celula **raiz_freq);
 int nova_arvore(celula *raiz,celula **raiz_freq );
 void printa(celula *raiz,int *numero);
 int armazena(celula **raiz,int freq,char palavra[]);
-void lista(celula *raiz, celula **raiz_freq);
+void lista(t_item *item_raiz,t_item *pitem);
