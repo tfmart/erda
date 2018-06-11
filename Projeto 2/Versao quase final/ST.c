@@ -5,24 +5,31 @@
 
 void printa(celula *raiz,int *numero){
 
-if(raiz){
+if(raiz && *numero !=0){
 
-printa(raiz->dir,numero);
+printa(raiz->dir, &(*numero));
 
 if(*numero!=0){
 
 printf("%i %s\n",raiz->item->freq,raiz->item->palavra);
+*numero-=1;
 
 
-if(raiz->item->prox!=NULL){
+if(raiz->item->prox!=NULL && *numero !=0){
+raiz->item=raiz->item->prox;
 
+
+
+while(raiz->item->prox!=NULL && *numero!=0){
 printf("%i %s\n",raiz->item->prox->freq,raiz->item->palavra);
+raiz->item=raiz->item->prox;
+*numero-=1;
+}}
+
+
 
 }
-(*numero)--;
-
-}
-printa(raiz->esq, numero);
+printa(raiz->esq, &(*numero));
 }
 }
 
@@ -38,11 +45,12 @@ void cria_arvore(celula *raiz, celula **raiz_freq){
 		if(raiz){
 		
 
-		cria_arvore(raiz->dir,raiz_freq);
+		cria_arvore(raiz->dir,&(*raiz_freq));
 
-		nova_arvore(raiz,&(*raiz_freq));
+		if(!nova_arvore(raiz,&(*raiz_freq)))
+			printf("Erro!\n");
 
-		cria_arvore(raiz->esq,raiz_freq);
+		cria_arvore(raiz->esq,&(*raiz_freq));
 		}
 
 }
@@ -55,25 +63,26 @@ if(*raiz_freq==NULL){
 
 (*raiz_freq)=(celula*)malloc(sizeof(celula));
 
-(*raiz_freq)->esq==NULL;
-(*raiz_freq)->dir==NULL;
+(*raiz_freq)->esq=NULL;
+(*raiz_freq)->dir=NULL;
 
 armazena(raiz_freq,raiz->item->freq,raiz->item->palavra);
-
+return 1;
 }
 else if(((*raiz_freq)->item->freq)==(raiz->item->freq)){
 
-lista((*raiz_freq),&raiz);
-return 0;
+lista((*raiz_freq)->item,raiz->item);
+return 1;
 
 
 }
-else if(((*raiz_freq)->item->freq)==(raiz->item->freq)){
+
+if(((*raiz_freq)->item->freq)>(raiz->item->freq)){
 return(nova_arvore(raiz,&(*raiz_freq)->esq));
-return(nova_arvore(raiz,&(*raiz_freq)->dir));
-
 
 }
+
+return(nova_arvore(raiz,&(*raiz_freq)->dir));
 }
 
 int armazena(celula **raiz,int freq,char palavra[]){
@@ -86,32 +95,25 @@ strcpy((*raiz)->item->palavra,palavra);
 (*raiz)->item->prox=NULL;
 return 0;}
 
-void lista(celula *raiz, celula **raiz_freq){
+void lista(t_item *item_raiz,t_item *pitem){
 
- t_item *aux=(t_item*)malloc(sizeof(t_item));
 
- t_item *auxiliador=(t_item*)malloc(sizeof(t_item));
+ t_item *auxiliador = item_raiz;
 
-auxiliador->prox=NULL;
 
-aux=(*raiz_freq)->item;
 
-strcpy(auxiliador->palavra,(raiz)->item->palavra);
+while(auxiliador->prox!=NULL){
 
-if(aux == NULL){
-
-(*raiz_freq)->item=auxiliador;
+auxiliador=auxiliador->prox;
 
 }
 
-else{
+auxiliador->prox = pitem;
 
-while(aux->prox!=NULL){
-aux=aux->prox;
-aux->prox=auxiliador;}
+
 
 }
-}
+
 
 void insere(celula **raiz, char palavra[]) 
 {	
