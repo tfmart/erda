@@ -3,24 +3,33 @@
 #include<stdlib.h>
 #include<string.h>
 
-void printa(celula *raiz)
-{
-	if(raiz){
-printa(raiz->esq);
+void printa(celula *raiz,int *numero){
+
+if(raiz){
+
+printa(raiz->dir,numero);
+
+if(*numero!=0){
+
 printf("%i %s\n",raiz->item->freq,raiz->item->palavra);
+
+
 if(raiz->item->prox!=NULL){
 
 printf("%i %s\n",raiz->item->prox->freq,raiz->item->palavra);
 
+}
+(*numero)--;
 
 }
-
-printa(raiz->dir);
-
-
-
+printa(raiz->esq, numero);
 }
 }
+
+
+
+
+
 
 
 void cria_arvore(celula *raiz, celula **raiz_freq){
