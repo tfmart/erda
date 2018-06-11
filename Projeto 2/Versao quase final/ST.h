@@ -9,4 +9,5 @@ typedef struct arvore celula;
 
 int insere(celula **raiz, char palavra[]);
 void cria_arvore(celula *raiz, celula **raiz_freq);
-int nova_arvore(celula **raiz_freq,celula *raiz );
+int nova_arvore(celula *raiz,celula **raiz_freq );
+void printa(celula *raiz);
