@@ -35,7 +35,8 @@ numero = converte(argv[i]);}}
 
 cria_arvore(lista,&lista2);
 
-printa(lista);
+
+printa(lista,&numero);
 
 
     return 0;
